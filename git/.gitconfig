@@ -1,0 +1,12 @@
+[user]
+	email = andrewwong998@gmail.com
+	name = Andrew Wong
+[core]
+	excludesfile = /Users/wongaj/.gitignore_global
+	editor = vim
+[color]
+	status = auto
+[alias]
+	co = checkout
+	st = status
+	pom = push origin master
