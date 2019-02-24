@@ -40,15 +40,21 @@ ehthumbs.db
 Thumbs.db
 
 # Core latex/pdflatex auxiliary files:
+.*.lb
 *.aux
+*.bbl
+*.bcf
+*.blg
+*.cb
+*.cb2
+*.fdb_latexmk
+*.fls
+*.fmt
+*.fot
+*.idx
 *.lof
 *.log
 *.lot
-*.fls
 *.out
+*.run.*
 *.toc
-*.fmt
-*.fot
-*.cb
-*.cb2
-.*.lb
