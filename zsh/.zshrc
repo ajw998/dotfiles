@@ -17,6 +17,11 @@ do
 	source $file
 done
 
+autoload -U compinit 
+compinit
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'
+fpath=(/usr/local/share/zsh-completions $fpath)
+
 # Git prompt
 source $HOME/dotfiles/zsh/git-prompt.sh
 
@@ -28,7 +33,6 @@ RPROMPT=\$vcs_info_msg_0_
 # PROMPT=\$vcs_info_msg_0_'%# '
 
 zstyle ':vcs_info:git:*' formats '%b'
-autoload -U compinit
 
 # iTerm2 zsh integration
 test -e "${HOME}/bin/.iterm2_shell_integration.zsh" && source "${HOME}/bin/.iterm2_shell_integration.zsh"
