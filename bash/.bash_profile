@@ -2,6 +2,7 @@ export TERM="xterm-256color"
 export HISTTIMEFORMAT="%h %d %H:%M:%S "
 eval "`dircolors -b`"
 # added by Anaconda3 2018.12 installer
+
 # >>> conda init >>>
 # !! Contents within this block are managed by 'conda init' !!
 __conda_setup="$(CONDA_REPORT_ERRORS=false '/anaconda3/bin/conda' shell.bash hook 2> /dev/null)"
@@ -17,3 +18,5 @@ else
 fi
 unset __conda_setup
 # <<< conda init <<<
+
+[[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
