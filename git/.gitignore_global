@@ -38,8 +38,10 @@ node_modules
 .Trashes
 ehthumbs.db
 Thumbs.db
+Desktop.ini
 
 # Core latex/pdflatex auxiliary files:
+######################
 .*.lb
 *.aux
 *.bbl
@@ -58,3 +60,8 @@ Thumbs.db
 *.out
 *.run.*
 *.toc
+
+# Python #
+###################
+venv
+*.pyc
