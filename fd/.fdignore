@@ -1,3 +1,4 @@
 Library/
 Lightroom/
 node_modules/
+*.config
