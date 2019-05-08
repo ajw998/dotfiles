@@ -1,5 +1,5 @@
 set nocompatible
-set number relativenumber
+set number
 
 syntax on 
 filetype off
