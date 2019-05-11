@@ -22,8 +22,8 @@ cd() {
 # fkill - kill processes - list only the ones you can kill. Modified the earlier script.
 fkill() {
     local pid
-    if [ "$UID" != "0" ]; then
-        pid=$(ps -f -u $UID | sed 1d | fzf -m | awk '{print $2}')
+    if [ "$uid" != "0" ]; then
+        pid=$(ps -f -u $uid | sed 1d | fzf -m | awk '{print $2}')
     else
         pid=$(ps -ef | sed 1d | fzf -m | awk '{print $2}')
     fi
@@ -34,20 +34,21 @@ fkill() {
     fi
 }
 
-port() {
-    lsof -i -P -n | grep 'LISTEN' | fzf -m --ansi
+# occupied ports
+op() {
+    lsof -i -p -n | grep 'listen' | fzf -m --ansi
 }
 
-# Launch simple server in Python
-# Defaults to port 8000
-# TODO: Check if port is available. If not, throw error
+# launch simple server in python
+# defaults to port 8000
+# todo: check if port is available. if not, throw error
 ss() {
-    PORT=${1:-8000}
-    PYEXEC=$(which python)
-    if [ -z ${PYEXEC} ]; then
-        echo "Python not found, please ensure Python is available and try again."
+    port=${1:-8000}
+    pyexec=$(which python)
+    if [ -z ${pyexec} ]; then
+        echo "python not found, please ensure python is available and try again."
         exit 1
     fi
 
-    python -m SimpleHTTPServer ${PORT}
+    python -m simplehttpserver ${port}
 }
