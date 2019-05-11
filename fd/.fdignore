@@ -2,3 +2,8 @@ Library/
 Lightroom/
 node_modules/
 *.config
+*.DS_Store
+.Rhistory
+*.CFUserTextEncoding
+.Trash
+vim/plugged
