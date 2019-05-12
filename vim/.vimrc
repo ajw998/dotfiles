@@ -1,13 +1,18 @@
 set nocompatible
-set number
-set relativenumber
-
-set cmdheight=2
-
 syntax enable 
 filetype off
-
+" Variable Declaration {{{
+let TODO_LIST='~/vimwiki/todo.md'
+" }}}
+" Vim Plug {{{
+" Automatic installation
+ if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
 call plug#begin('~/.vim/plugged')
+Plug 'vimwiki/vimwiki'
 Plug 'morhetz/gruvbox'
 Plug 'sheerun/vim-polyglot'
 Plug 'w0rp/ale'
@@ -20,41 +25,58 @@ Plug 'tpope/vim-fugitive'
 Plug 'itchyny/lightline.vim'
 Plug 'tpope/vim-vinegar'
 call plug#end()
-
 filetype plugin indent on
-
-" Set mapleader
-" You may find out the mapleader by typing ``echo mapleader``
-" in command mode
-let mapleader = ','
-
+" }}}
+" Editor Settings {{{
+set splitbelow
+set splitright
+set hlsearch
+set mouse=n
+set backspace=indent,eol,start
+set autoindent
+set autoread
+set lazyredraw
 set tabstop=4 softtabstop=0 expandtab shiftwidth=4 smarttab
 set wrap
 set linebreak
-
+set cursorline 
 set encoding=utf-8
-set colorcolumn=80
-set statusline=%f
 set viminfo=""
-
-set splitbelow
-set splitright
-
+set title 
+set relativenumber
+set cmdheight=2
+" Command mode smartcase
+augroup dynamic_smartcase
+    autocmd!
+    autocmd CmdLineEnter : set nosmartcase
+    autocmd CmdLineLeave : set smartcase
+augroup END
+" }}}
+" UI Settings {{{
+set number
 set path+=**
 set wildmenu
+set showcmd
+set showmatch
 set laststatus=2
-
-set hlsearch
-set mouse=n
-
+set list
+set listchars=tab:→\ ,eol:¬,trail:⋅,extends:❯,precedes:❮
+set showbreak=↪
+set colorcolumn=80
+set statusline=%f
+" }}}
+" Netrw settings {{{
 let g:netrw_banner = 0
 let g:netrw_browse_split = 4
 let g:netrw_altv = 1
 let g:netrw_winsize = 25
 let g:netrw_liststyle = 3
-
-" Colour scheme
-" UI and lightline
+" }}}
+" Folding {{{
+set foldenable
+set foldmethod=marker
+" }}}
+" Theme Settings {{{
 " Colourscheme must be declared 
 " before setting background to dark
 colorscheme gruvbox
@@ -64,8 +86,12 @@ let g:lightline = {
     \ 'colorscheme': 'gruvbox',
     \ }
 set bg=dark
-set backspace=2
 
+" Transparent background
+" hi Normal guibg=NONE ctermbg=NONE
+" }}}
+" Custom mappings {{{
+"
 imap jk <Esc>
 nnoremap ; :
 nnoremap <silent> <space> :nohlsearch<bar>:echo<cr>
@@ -75,25 +101,39 @@ nnoremap j gj
 nnoremap k gk
 
 " Command to toggle colorcolumn
-command! ToggleCC :let &cc = &cc == '' ? '70, 80, 90' : ''
+let &cc = ''
 nnoremap <F2> :let &cc = &cc == '' ? '70,80,90' : ''<CR>
 
-" Transparent background
-" hi Normal guibg=NONE ctermbg=NONE
-
-" Filetype coercion 
+" Open task list
+function! LaunchTodo(path) 
+    execute "vsplit" a:path
+endfunction
+command! LaunchTodo call LaunchTodo(TODO_LIST)
+nnoremap TT :LaunchTodo<CR>
+" Disable Ex mode
+nmap Q <Nop>
+" }}}
+" Filetype settings {{{
 autocmd BufNewFile,BufRead *.json set ft=javascript
 autocmd BufNewFile,BufRead *.markdown set ft=markdown
 autocmd BufNewFile,BufRead *.md set ft=markdown
-
-" Syntax coercion
+" Syntax coercion (default to markdown)
 au BufNewFile,BufRead * if &syntax == '' | set syntax=markdown | endif
 
-" ALE (Linting plugin) settings
-let g:ale_sign_error = '❌'
-let g:ale_sign_warning = '⚠️'
-
-" Tab completion for coc.vim
+" Proper PEP8 implementation for python
+autocmd BufNewFile,BufRead *.py
+    \  setlocal tabstop=4 softtabstop=4 shiftwidth=4 textwidth=79 expandtab autoindent
+" }}}
+" ALE (Linting plugin) settings {{{
+"
+let g:ale_sign_error = '✖'
+let g:ale_sign_warning = '⚠'
+let g:ale_echo_msg_error_str = '✖'
+let g:ale_echo_msg_warning_str = '⚠'
+let g:ale_echo_msg_format = '%severity% %s% [%linter%% code%]'
+" }}}
+" coc.vim settings {{{
+"
 inoremap <silent><expr> <TAB>
             \ pumvisible() ? "\<C-n>" :
             \ <SID>check_back_space() ? "\<TAB>" :
@@ -105,7 +145,8 @@ function! s:check_back_space() abort
     return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
-" ProseMode function
+" }}} 
+" Goyo.vim settings {{{
 function! ProseMode() 
     call goyo#execute(0, [])
     set spell noci nosi noai nolist noshowmode noshowcmd
@@ -116,14 +157,9 @@ endfunction
 
 command! ProseMode call ProseMode()
 nnoremap \p :ProseMode<CR>
-
-" Command mode smartcase
-augroup dynamic_smartcase
-    autocmd!
-    autocmd CmdLineEnter : set nosmartcase
-    autocmd CmdLineLeave : set smartcase
-augroup END
-
+" }}}
+" FZF.vim settings {{{
+"
 " Change fzf colour to match gruvbox theme
 let g:fzf_colors = {
     \ 'fg':      ['fg', 'GruvboxGray'],
@@ -139,14 +175,32 @@ let g:fzf_colors = {
     \ 'marker':  ['fg', 'Error'],
     \ 'spinner': ['fg', 'Statement'],
     \ }
-
-"============================== 
-" Leader Key mappings
-"==============================
+" }}}
+" Vimwiki Settings {{{ 
+let g:vimwiki_list = [{'path': '~/vimwiki/',
+                      \ 'syntax': 'markdown', 'ext': '.md'}]
+" }}}
+" Leader bindings {{{
 "
-" Search for files
-" Typing ,t will trigger fzf search
+" Set map leader to ,
+let mapleader = ','
+
+" Search for files from root directory
+ nnoremap <Leader>T :Files ~<CR>
+
+" Search for files from current workign directory
 nnoremap <Leader>t :Files<CR>
+
+" Cycling through buffers
+nnoremap <Leader>b :Buffers<CR> 
 
 " Quick saving
 nnoremap <Leader>w :w<CR>
+
+" Close buffer
+ nnoremap <Leader>c :bd<CR>
+
+" Switch between current and last buffer
+nnoremap <Leader>. <C-^>
+" }}}
+
