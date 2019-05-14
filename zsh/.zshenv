@@ -1,5 +1,5 @@
 EDITOR=$(which vim)
-FZF_DEFAULT_COMMAND='fd --type f'
+FZF_DEFAULT_COMMAND='fd --type f --hidden' 
 FZF_CTRL_T_COMMAND='fd --type f --hidden'
 FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border --ansi'
 HISTCONTROL=ignoreboth:erasedups
