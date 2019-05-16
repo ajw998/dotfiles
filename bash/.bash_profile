@@ -20,3 +20,4 @@ unset __conda_setup
 # <<< conda init <<<
 
 [[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
+
