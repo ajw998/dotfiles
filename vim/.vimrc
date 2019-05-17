@@ -16,7 +16,6 @@ endfunction
 call Config_setEnv()
 " }}}
 " Pre-plugin settings {{{
-"
 set nocompatible
 syntax enable 
 filetype off
@@ -35,10 +34,10 @@ call plug#begin('~/.vim/plugged')
 Plug '/usr/local/opt/fzf'
 Plug 'itchyny/lightline.vim'
 Plug 'tpope/vim-eunuch'
+Plug 'morhetz/gruvbox'
 Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/fzf.vim'
 Plug 'mattn/emmet-vim' 
-Plug 'morhetz/gruvbox'
 Plug 'sheerun/vim-polyglot'
 Plug 'tommcdo/vim-lion'
 Plug 'tpope/vim-commentary'
@@ -136,9 +135,9 @@ set foldmethod=marker
 " Theme settings {{{
 " Colourscheme must be declared 
 " before setting background to dark
-colorscheme gruvbox
 let g:gruvbox_contrast_dark = 'hard'
 let g:gruvbox_termcolors=256
+colorscheme gruvbox
 let g:lightline = {
             \ 'colorscheme': 'gruvbox',
             \ 'active': {
@@ -218,21 +217,6 @@ let g:vim_markdown_frontmatter=1
 " }}}
 " FZF.vim settings {{{
 "
-" Change fzf colour to match gruvbox theme
-let g:fzf_colors = {
-            \ 'fg':      ['fg', 'GruvboxGray'],
-            \ 'bg':      ['bg', 'Normal'],
-            \ 'hl':      ['fg', 'GruvboxRed'],
-            \ 'fg+':     ['fg', 'GruvboxGreen'],
-            \ 'bg+':     ['bg', 'GruvboxBg1'],
-            \ 'hl+':     ['fg', 'GruvboxRed'],
-            \ 'info':    ['fg', 'GruvboxOrange'],
-            \ 'prompt':  ['fg', 'GruvboxBlue'],
-            \ 'header':  ['fg', 'GruvboxBlue'],
-            \ 'pointer': ['fg', 'Error'],
-            \ 'marker':  ['fg', 'Error'],
-            \ 'spinner': ['fg', 'Statement'],
-            \ }
 " }}}
 " vim-prettier settings {{{
 " Use tabs over spaces
