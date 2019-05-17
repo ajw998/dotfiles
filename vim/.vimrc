@@ -32,48 +32,53 @@ if empty(glob('~/.vim/autoload/plug.vim'))
     autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 call plug#begin('~/.vim/plugged')
-Plug 'mattn/emmet-vim' 
-Plug 'vimwiki/vimwiki'
-Plug 'morhetz/gruvbox'
-Plug 'w0rp/ale'
 Plug '/usr/local/opt/fzf'
-Plug 'junegunn/fzf.vim'
-Plug 'jiangmiao/auto-pairs'
 Plug 'itchyny/lightline.vim'
-Plug 'tpope/vim-vinegar'
-Plug 'vim-latex/vim-latex', {'for': 'tex'}
+Plug 'tpope/vim-eunuch'
+Plug 'jiangmiao/auto-pairs'
+Plug 'junegunn/fzf.vim'
+Plug 'mattn/emmet-vim' 
+Plug 'morhetz/gruvbox'
+Plug 'sheerun/vim-polyglot'
+Plug 'tommcdo/vim-lion'
+Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
-Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}
+Plug 'tpope/vim-unimpaired'
+Plug 'vim-latex/vim-latex', {'for': 'tex'}
 Plug 'vim-pandoc/vim-pandoc'
 Plug 'vim-pandoc/vim-pandoc-syntax'
-Plug 'sheerun/vim-polyglot'
-Plug 'tpope/vim-commentary'
+Plug 'vimwiki/vimwiki'
 Plug 'prettier/vim-prettier', {
             \ 'do': 'yarn install',
             \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
 call plug#end()
 filetype plugin indent on
 " }}}
-" Editor Settings {{{
-set splitbelow
-set splitright
-set hidden
-set hlsearch
-set mouse=n
-set backspace=indent,eol,start
+" Editor settings {{{
 set autoindent
 set autoread
-set lazyredraw
-set tabstop=4 softtabstop=0 expandtab shiftwidth=4 smarttab
-set wrap
-set linebreak
+set backspace=indent,eol,start
+set cmdheight=2
 set cursorline 
 set encoding=utf-8
-set viminfo=""
-set title 
-set relativenumber
-set cmdheight=2
+set hidden
+set hlsearch
+set lazyredraw
+set linebreak
+set mouse=n
 set nospell
+set novisualbell
+set omnifunc=syntaxcomplete#Complete
+set relativenumber
+set ruler
+set splitbelow
+set splitright
+set tabstop=4 softtabstop=0 expandtab shiftwidth=4 smarttab
+set textwidth=0 " No autowrap
+set title 
+set viminfo=""
+set virtualedit=block
+set wrap
 " Command mode smartcase
 augroup dynamic_smartcase
     autocmd!
@@ -81,10 +86,26 @@ augroup dynamic_smartcase
     autocmd CmdLineLeave : set smartcase
 augroup END
 " }}}
+" Wildmenu settings {{{
+set wildmenu " turn on command line completion wild style
+set wildignore=*.a,*.o,*.obj,*.exe,*.dll,*.manifest " compiled object files
+set wildignore+=*.aux,*.out,*.toc " LaTeX intermediate files
+set wildignore+=*.DS_Store " OSX bullshit
+set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg " binary images
+set wildignore+=*.luac " Lua byte code
+set wildignore+=migrations " Django migrations
+set wildignore+=*.orig " Merge resolution file
+set wildignore+=*.pdf,*.zip,*.so " binaries
+set wildignore+=*.pyc,*.pyo " Python byte code
+set wildignore+=*.spl " compiled spelling word lists
+set wildignore+=*.swp,*.bak " ignore these
+set wildignore+=*.sw? " Vim swap files
+set wildignore+=**/vendor " Ignore vendor directory
+set wildmode=list:longest " turn on wild mode full match only"
+" }}}
 " UI Settings {{{
 set number
 set path+=**
-set wildmenu
 set showcmd
 set showmatch
 set laststatus=2
@@ -92,7 +113,6 @@ set list
 set listchars=tab:→\ ,eol:¬,trail:⋅,extends:❯,precedes:❮
 set showbreak=↪
 set colorcolumn=80
-set statusline=%f
 " }}}
 " Cursor setting {{{
 highlight Cursor guifg=white guibg=black
@@ -113,7 +133,7 @@ let g:netrw_liststyle = 3
 set foldenable
 set foldmethod=marker
 " }}}
-" Theme Settings {{{
+" Theme settings {{{
 " Colourscheme must be declared 
 " before setting background to dark
 colorscheme gruvbox
@@ -192,49 +212,9 @@ au BufNewFile,BufRead * if &syntax == '' | set syntax=markdown | endif
 autocmd BufNewFile,BufRead *.py
             \  setlocal tabstop=4 softtabstop=4 shiftwidth=4 textwidth=79 expandtab autoindent
 " }}}
-" ALE (Linting plugin) settings {{{
-"
-let g:ale_lint_on_enter = 1
-let g:ale_sign_error = '✖'
-let g:ale_sign_warning = '⚠'
-let g:ale_echo_msg_error_str = '✖'
-let g:ale_echo_msg_warning_str = '⚠'
-let g:ale_echo_msg_format = '%severity% %s% [%linter%% code%]'
-let g:ale_linters = {
-            \  'cpp':        ['clangtidy'],
-            \  'css':        ['csslint'],
-            \  'javascript': ['eslint'],
-            \  'json':       ['jsonlint'],
-            \  'markdown':   ['mdl'],
-            \  'ruby':       ['rubocop'],
-            \  'scss':       ['sasslint'],
-            \  'yaml':       ['yamllint']
-            \}
-" }}}
-" coc.nvim settings {{{
-function! s:check_back_space() abort
-    let col = col('.') - 1
-    return !col || getline('.')[col - 1]  =~ '\s'
-endfunction
-
-inoremap <silent><expr> <TAB>
-            \ pumvisible() ? "\<C-n>" :
-            \ <SID>check_back_space() ? "\<TAB>" :
-            \ coc#refresh()
-
-" Use K for show documentation in preview window
-nnoremap <silent> K :call <SID>show_documentation()<CR>
-
-function! s:show_documentation()
-    if &filetype == 'vim'
-        execute 'h '.expand('<cword>')
-    else
-        call CocAction('doHover')
-    endif
-endfunction
-" }}}
-" Polyglot.vim settings {{{
-let g:polyglot_disabled = ['md']
+" Markdown settings {{{
+let g:vim_markdown_folding_disabled=0
+let g:vim_markdown_frontmatter=1
 " }}}
 " FZF.vim settings {{{
 "
@@ -273,7 +253,9 @@ let g:user_emmet_leader_key='<C-x>'
 " Leader bindings {{{
 "
 " Set map Leader to ,
-let mapleader = ','
+let mapleader = 'L'
+
+nnoremap <Leader>a :argadd <c-r>=fnameescape(expand('%:p:h'))<cr>/*<C-d>
 
 " Search for files from root directory
 nnoremap <Leader>T :Files ~<CR>
@@ -282,22 +264,19 @@ nnoremap <Leader>T :Files ~<CR>
 nnoremap <Leader>t :Files<CR>
 
 " Open Buffers list
-nnoremap <Leader>bs :Buffers<CR> 
+nnoremap <Leader>b :Buffers<CR> 
 
-" No name buffer
-nnoremap <Leader>bc :enew<CR>
-
-" Previous buffer
-nnoremap <Leader>bb :b# <CR>
+" Quick switch
+nnoremap <Leader>q :b#<CR>
 
 " Close buffer
-nnoremap <Leader>bz :bd<CR>
+nnoremap <leader>x :bd<CR>
 
-" Quick saving
-nnoremap <Leader>w :w<CR>
+" Opening a single file
+nnoremap <Leader>e :e **/
 
-" Switch between current and last buffer
-nnoremap <Leader>. <C-^>
+" make file
+nnoremap <leader>m :make<cr>
 
 " Remove highlighted search results
 nnoremap <Leader><space> :nohlsearch<bar>:echo<cr>
@@ -306,14 +285,7 @@ nnoremap <Leader><space> :nohlsearch<bar>:echo<cr>
 nnoremap <Leader>, :e ~/.vimrc<CR>
 
 " Open ctags
-nnoremap <Leader>gs :Tags<CR>
-
-" coc.vim
-" Renaming symbols
- nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <Leader>lr <Plug>(coc-rename)
-nmap <silent> <Leader>lf <Plug>(coc-references)
+nnoremap <Leader>j :Tags<CR>
 
 " Undocumented assignments from plugins
 " <Leader>p - Run Prettier
