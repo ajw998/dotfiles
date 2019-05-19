@@ -46,7 +46,7 @@ op() {
         port=${1:-8000}
         pyexec=$(which python)
         if [ -z ${pyexec} ]; then
-            echo "python not found, please ensure python is available and try again."
+            echo "Python not found, please ensure python is available and try again."
             exit 1
         fi
 
@@ -58,7 +58,7 @@ op() {
 colors() {
     T='gYw'   # The test text
 
-    echo -e "\n                 40m     41m     42m     43m\
+    echo -e "\n 40m     41m     42m     43m\
         44m     45m     46m     47m";
 
     for FGs in '    m' '   1m' '  30m' '1;30m' '  31m' '1;31m' '  32m' \
