@@ -6,6 +6,7 @@ SAVEHIST=1000
 export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
 export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
 export PATH="/usr/local/opt/findutils/libexec/gnubin:$PATH"
+export PATH="/bin:$PATH"
 
 setopt prompt_subst
 PROMPT='%F{red}%B%n%b%f@[%F{yellow}%B%1~%b%f]%# '
@@ -20,12 +21,8 @@ do
 done
 
 autoload -Uz compinit 
-for dump in ~/.zcompdump(N.mh+24); do
-    compinit
-done
 compinit -C
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'
-fpath=(/usr/local/share/zsh-completions $fpath)
 
 # Git prompt
 source $HOME/dotfiles/zsh/git-prompt.sh
@@ -34,8 +31,6 @@ autoload -Uz vcs_info
 precmd_vcs_info() { vcs_info }
 precmd_functions+=( precmd_vcs_info )
 RPROMPT=\$vcs_info_msg_0_
-
-# PROMPT=\$vcs_info_msg_0_'%# '
 
 zstyle ':vcs_info:git:*' formats '%b'
 
