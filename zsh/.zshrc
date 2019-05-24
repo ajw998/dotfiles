@@ -1,6 +1,6 @@
 HISTFILE=~/.histfile
-HISTSIZE=1000
-SAVEHIST=1000
+HISTSIZE=100
+SAVEHIST=100
 
 # export PATH="/usr/local/anaconda3/bin:$PATH"  # commented out by conda initialize
 export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
