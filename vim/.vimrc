@@ -17,11 +17,11 @@ call Config_setEnv()
 " }}}
 " Pre-plugin settings {{{
 set nocompatible
-syntax enable 
 filetype off
+syntax off
 " }}}
 " Variable Declaration {{{
-let TODO_LIST='~/vimwiki/todo.md'
+let TODO_LIST='~/knowledgeBase/todo.md'
 " }}}
 " Vim Plug {{{
 " Automatic installation
@@ -32,58 +32,56 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 call plug#begin('~/.vim/plugged')
 Plug '/usr/local/opt/fzf'
-Plug 'itchyny/lightline.vim'
-Plug 'tpope/vim-eunuch'
-Plug 'morhetz/gruvbox'
-Plug 'jiangmiao/auto-pairs'
+Plug 'arcticicestudio/nord-vim'
 Plug 'junegunn/fzf.vim'
-Plug 'mattn/emmet-vim' 
-Plug 'sheerun/vim-polyglot'
+Plug 'justinmk/vim-dirvish'
+Plug 'justinmk/vim-sneak'
+Plug 'lervag/vimtex'
+Plug 'mbbill/undotree'
+Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}
 Plug 'tommcdo/vim-lion'
 Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-eunuch'
+Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
-Plug 'vim-latex/vim-latex', {'for': 'tex'}
-Plug 'vim-pandoc/vim-pandoc'
-Plug 'vim-pandoc/vim-pandoc-syntax'
 Plug 'vimwiki/vimwiki'
-Plug 'prettier/vim-prettier', {
-            \ 'do': 'yarn install',
-            \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
 call plug#end()
 filetype plugin indent on
+syntax enable 
 " }}}
 " Editor settings {{{
 set autoindent
 set autoread
 set backspace=indent,eol,start
+set backupdir=/private/tmp
 set cmdheight=2
-set cursorline 
+set cursorline
+set directory=~/.vim/swap
 set encoding=utf-8
 set hidden
 set hlsearch
+set ignorecase
 set lazyredraw
 set linebreak
+set matchtime=2
 set mouse=n
 set nospell
 set novisualbell
 set omnifunc=syntaxcomplete#Complete
 set relativenumber
 set ruler
-set splitbelow
+set smartcase
+set splitbelow 
 set splitright
-set tabstop=4 softtabstop=0 expandtab shiftwidth=4 smarttab
+set tabstop=4 softtabstop=0 shiftwidth=4 smarttab
 set textwidth=0 " No autowrap
-set title 
+set title
 set viminfo=""
 set virtualedit=block
 set wrap
-" Command mode smartcase
-augroup dynamic_smartcase
-    autocmd!
-    autocmd CmdLineEnter : set nosmartcase
-    autocmd CmdLineLeave : set smartcase
-augroup END
+" Workaround for being stuck in Insert(paste) mode
+au InsertLeave * set nopaste
 " }}}
 " Wildmenu settings {{{
 set wildmenu " turn on command line completion wild style
@@ -109,13 +107,13 @@ set showcmd
 set showmatch
 set laststatus=2
 set list
-set listchars=tab:→\ ,eol:¬,trail:⋅,extends:❯,precedes:❮
-set showbreak=↪
+set listchars=tab:→\ ,eol:↲,nbsp:␣,trail:•,extends:⟩,precedes:⟨
+set showbreak=↪ 
 set colorcolumn=80
 " }}}
 " Cursor setting {{{
-highlight Cursor guifg=white guibg=black
-highlight iCursor guifg=white guibg=steelblue
+" highlight Cursor guifg=white guibg=black
+" highlight iCursor guifg=white guibg=steelblue
 set guicursor=n-v-c:block-Cursor
 set guicursor+=i:ver100-iCursor
 set guicursor+=n-v-c:blinkon0
@@ -127,57 +125,72 @@ let g:netrw_browse_split = 4
 let g:netrw_altv = 1
 let g:netrw_winsize = 25
 let g:netrw_liststyle = 3
+let g:loaded_netrwPlugin = 1
+command! -nargs=? -complete=dir Explore Dirvish <args>
+command! -nargs=? -complete=dir Sexplore belowright split | silent Dirvish <args>
+command! -nargs=? -complete=dir Vexplore leftabove vsplit | silent Dirvish <args>
 " }}}
 " Folding {{{
 set foldenable
-set foldmethod=marker
+set foldmethod=manual
 " }}}
 " Theme settings {{{
-" Colourscheme must be declared 
+" Colourscheme must be declared
 " before setting background to dark
-let g:gruvbox_contrast_dark = 'hard'
-let g:gruvbox_termcolors=256
-colorscheme gruvbox
-let g:lightline = {
-            \ 'colorscheme': 'gruvbox',
-            \ 'active': {
-            \   'left': [ [ 'mode', 'paste' ],
-            \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
-            \ },
-            \ 'component_function': {
-            \   'gitbranch': 'fugitive#head'
-            \ },
-            \ }
-
-function! LightlineBufferline()
-    call bufferline#refresh_status()
-    return [ g:bufferline_status_info.before, g:bufferline_status_info.current, g:bufferline_status_info.after]
-endfunction
-set bg=dark
-command! LightlineReload call LightlineReload()
-function! LightlineReload()
-    call lightline#init()
-    call lightline#colorscheme()
-    call lightline#update()
-endfunction
+colorscheme nord 
 " Transparent background
-" hi Normal guibg=NONE ctermbg=NONE
+hi Normal guibg=NONE ctermbg=NONE
+" }}}
+" Statusline settings {{{
+" TODO: Git status, current mode colour 
+" Highlighting groups
+let g:currentmode={ 'n' : 'Normal ', 'no' : 'N·Operator Pending ', 'v' : 'Visual ', 'V' : 'V·Line ', '^V' : 'V·Block ', 's' : 'Select ', 'S': 'S·Line ', '^S' : 'S·Block ', 'i' : 'Insert ', 'R' : 'Replace ', 'Rv' : 'V·Replace ', 'c' : 'Command ', 'cv' : 'Vim Ex ', 'ce' : 'Ex ', 'r' : 'Prompt ', 'rm' : 'More ', 'r?' : 'Confirm ', '!' : 'Shell ', 't' : 'Terminal '}
+function! ModeCurrent() abort
+    let l:modecurrent = mode()
+    let l:modelist = toupper(get(g:currentmode, l:modecurrent, 'V·Block '))
+    let l:current_status_mode = l:modelist
+    return l:current_status_mode
+endfunction
+
+
+hi User1 cterm=bold  ctermbg=12
+hi User3 ctermfg=white ctermbg=12
+" Status bar colour change
+if version >= 700
+    " Pass
+    " See this https://stackoverflow.com/questions/11147157/vim-change-the-status-line-color-in-insert-mode
+    endif
+set statusline=
+set statusline+=%1*\ %{ModeCurrent()}\%*      " Show current mode
+set statusline+=\ \  
+set statusline+=%f                      " Current file path
+set statusline+=\ \  
+set statusline+=%m                      " Modified flag
+set statusline+=%=                      " Switch to the right side
+set statusline+=%l:%L
+set statusline+=\ \  
+set statusline+=\ %p                      " Percentage through file in lines
+set statusline+=\ \  
+set statusline+=%3*\ %y\ %*                       " Filetype
 " }}}
 " Custom mappings {{{
 "
 imap jk <Esc>
-nnoremap ; :
+nmap ; :
 
 " Moving down visual (screen) lines instead of physical line
 nnoremap j gj
 nnoremap k gk
+
+" Hide all buffers 
+nnoremap <silent> MM :new<Bar>only<CR>
 
 " Command to toggle colorcolumn
 let &cc = ''
 nnoremap <F2> :let &cc = &cc == '' ? '70,80,90' : ''<CR>
 
 " Open task list
-function! WikiSplit(path) 
+function! WikiSplit(path)
     execute "vsplit" a:path
 endfunction
 command! WikiSplit call WikiSplit(TODO_LIST)
@@ -199,11 +212,71 @@ nnoremap ∆ :m . +1<CR>==
 nnoremap ˚ :m . -2<CR>==
 vnoremap ∆ :m '>+1<CR>gv=gv
 vnoremap ˚ :m '<-2<CR>gv=gv
+
+" Omnicompletion hotkeys
+inoremap <silent> ,f <C-x><C-f>
+inoremap <silent> ,i <C-x><C-i>
+inoremap <silent> ,l <C-x><C-l>
+inoremap <silent> ,n <C-x><C-n>
+inoremap <silent> ,o <C-x><C-o>
+inoremap <silent> ,t <C-x><C-]>
+inoremap <silent> ,u <C-x><C-u>
+
+" Generate ctags
+nnoremap \r :!ctags -R .<CR>
+" Strip whitespace
+function! StripTrailingWhitespace()
+    if !&binary && &filetype != 'diff'
+        normal mz
+        normal Hmy
+        %s/\s\+$//e
+        normal 'yz<CR>
+        normal `z
+    endif
+endfunction
+command! StripTrailingWhitespace call StripTrailingWhitespace()
+nnoremap <F3> :StripTrailingWhitespace<CR>
+
+" Undo Tree
+nnoremap <F5> :UndotreeToggle<CR>
+
+" Sneak
+nmap <expr> ` sneak#is_sneaking() ? '<Plug>Sneak_;' : '<Tab>'
+
+" Show documentation
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+function! s:show_documentation()
+    if (index(['vim','help'], &filetype) >= 0)
+        execute 'h '.expand('<cword>')
+    else
+        call CocAction('doHover')
+    endif
+endfunction
+
 " }}}
 " Filetype settings {{{
-autocmd BufNewFile,BufRead *.json set ft=javascript
+" C++
+autocmd FileType c,cpp setlocal path+=/usr/include include&
+
+" Markdown
+autocmd FileType markdown let b:coc_suggest_disable = 1
+autocmd FileType vimwiki let b:coc_suggest_disable = 1
+
+" vimrc
+augroup vim
+    autocmd!
+    autocmd FileType vim setlocal foldmethod=marker
+augroup END 
+
+augroup text
+    autocmd!
+    autocmd FileType text setlocal listchars= syntax=off
+augroup END
+
+" Vimrc
 autocmd BufNewFile,BufRead *.markdown set ft=markdown
 autocmd BufNewFile,BufRead *.md set ft=markdown
+
 " Syntax coercion (default to markdown)
 au BufNewFile,BufRead * if &syntax == '' | set syntax=markdown | endif
 
@@ -211,28 +284,51 @@ au BufNewFile,BufRead * if &syntax == '' | set syntax=markdown | endif
 autocmd BufNewFile,BufRead *.py
             \  setlocal tabstop=4 softtabstop=4 shiftwidth=4 textwidth=79 expandtab autoindent
 " }}}
-" Markdown settings {{{
-let g:vim_markdown_folding_disabled=0
-let g:vim_markdown_frontmatter=1
+" Undotree settings {{{
+let g:undotree_WindowLayout=1
 " }}}
-" FZF.vim settings {{{
-"
+" Vim Sneak settings {{{
+let g:sneak#use_ic_scs=1
 " }}}
-" vim-prettier settings {{{
-" Use tabs over spaces
-let g:prettier#config#tab_width = 4
-let g:prettier#config#use_tabs = 'true'
-let g:prettier#config#arrow_parens = 'avoid'
-" }}}
-" Vimwiki settings {{{ 
-let g:vimwiki_list = [{'path': '~/vimwiki/',
-            \ 'syntax': 'markdown', 'ext': '.md'}]
-" }}}
-" Emmet.vim settings {{{
-let g:user_emmet_install_global=0
-autocmd FileType html,css EmmetInstall
+" coc.nvim settings {{{
+" Use tab for trigger completion with characters ahead and navigate.
+" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
+"})
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+nmap <silent> [c <Plug>(coc-diagnostic-prev)
+nmap <silent> ]c <Plug>(coc-diagnostic-next)
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
+nmap <silent> gr <Plug>(coc-references)
+inoremap <silent><expr> <TAB>
+            \ pumvisible() ? "\<C-n>" :
+            \ <SID>check_back_space() ? "\<TAB>" :
+            \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
-let g:user_emmet_leader_key='<C-x>'
+function! s:check_back_space() abort
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~# '\s'
+endfunction"
+
+" Close preview window when done
+autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
+" }}}
+" Vimtex settings {{{
+let g:vimtex_enabled=1
+let g:vimtex_compiler_enabled=1
+let g:tex_flavor='tex'
+let g:vimtex_compiler_latexmk ={ 
+            \'build_dir' : 'build'    
+            \}
+" }}}
+" Vimwiki settings {{{
+let g:vimwiki_list = [{'path': '~/knowledgeBase/',
+            \ 'syntax': 'markdown', 'ext': '.md'}]
+let g:vimwiki_global_ext=0
+" }}}
+" Autopairs settings {{{
+let g:AutoPairsFlyMode=1
 " }}}
 " Leader bindings {{{
 "
@@ -248,7 +344,7 @@ nnoremap <Leader>T :Files ~<CR>
 nnoremap <Leader>t :Files<CR>
 
 " Open Buffers list
-nnoremap <Leader>b :Buffers<CR> 
+nnoremap <Leader>b :Buffers<CR>
 
 " Quick switch
 nnoremap <Leader>q :b#<CR>
@@ -259,17 +355,24 @@ nnoremap <leader>x :bd<CR>
 " Opening a single file
 nnoremap <Leader>e :e **/
 
+" Show marks
+nnoremap <Leader>m :Marks<CR>
+
 " make file
-nnoremap <leader>m :make<cr>
+nnoremap <Leader>M :make<cr>
 
 " Remove highlighted search results
-nnoremap <Leader><space> :nohlsearch<bar>:echo<cr>
+" nnoremap <Leader><space> :nohlsearch<bar>:echo<cr>
+nnoremap <Leader><Space> :let@/=""<CR>
 
 " Edit .vimrc
 nnoremap <Leader>, :e ~/.vimrc<CR>
 
 " Open ctags
 nnoremap <Leader>j :Tags<CR>
+
+" Rename current word (coc.nvim)
+nmap <leader>rn <Plug>(coc-rename)
 
 " Undocumented assignments from plugins
 " <Leader>p - Run Prettier
