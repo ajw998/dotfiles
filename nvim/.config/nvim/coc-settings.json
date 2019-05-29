@@ -1,3 +1,7 @@
 {
-    "coc.source.buffer.disableSyntaxes": ["comment"],
+	"coc.source.buffer.disableSyntaxes": ["comment"],
+	"suggest.echodocSupport": true,
+	"diagnostic.errorSign": "✘",
+	"diagnostic.infoSign": "•",
+	"diagnostic.warningSign": "!"
 }
