@@ -42,10 +42,10 @@ Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}
 Plug 'tommcdo/vim-lion'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-eunuch'
-Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'vimwiki/vimwiki'
+Plug 'zah/nim.vim'
 call plug#end()
 filetype plugin indent on
 syntax enable 
@@ -182,9 +182,6 @@ nmap ; :
 nnoremap j gj
 nnoremap k gk
 
-" Hide all buffers 
-nnoremap <silent> MM :new<Bar>only<CR>
-
 " Command to toggle colorcolumn
 let &cc = ''
 nnoremap <F2> :let &cc = &cc == '' ? '70,80,90' : ''<CR>
@@ -196,13 +193,11 @@ endfunction
 command! WikiSplit call WikiSplit(TODO_LIST)
 nnoremap TT :WikiSplit<CR>
 
-" Open Diary List
-" You could also use <Leader>wi to accomplish this
-nnoremap TD :vsplit<bar>VimwikiDiaryIndex<CR>
-
-" Open Diary
 " Disable Ex mode
 nmap Q <Nop>
+
+" Jump to end of line in insert mode
+inoremap <C-e><C-e> <C-o>$
 
 " Group comment
 " Moving lines
@@ -253,6 +248,16 @@ function! s:show_documentation()
     endif
 endfunction
 
+" Simple re-format for minified Javascript
+command! UnMinify call UnMinify()
+function! UnMinify()
+    %s/{\ze[^\r\n]/{\r/g
+    %s/){/) {/g
+    %s/};\?\ze[^\r\n]/\0\r/g
+    %s/;\ze[^\r\n]/;\r/g
+    %s/[^\s]\zs[=&|]\+\ze[^\s]/ \0 /g
+    normal ggVG=
+endfunction
 " }}}
 " Filetype settings {{{
 " C++
@@ -270,8 +275,17 @@ augroup END
 
 augroup text
     autocmd!
-    autocmd FileType text setlocal listchars= syntax=off
+    autocmd FileType text setlocal listchars= syntax=off spell
 augroup END
+
+" Markdown
+augroup markdown
+	autocmd!
+	autocmd FileType markdown setlocal spell
+augroup END
+
+" EJS
+autocmd BufNewFile,BufRead *.ejs set ft=html
 
 " Vimrc
 autocmd BufNewFile,BufRead *.markdown set ft=markdown
@@ -314,8 +328,22 @@ endfunction"
 " Close preview window when done
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 " }}}
+" Language settings {{{
+fun! JumpToDef()
+  if exists("*GotoDefinition_" . &filetype)
+    call GotoDefinition_{&filetype}()
+  else
+    exe "norm! \<C-]>"
+  endif
+endf
+
+" Jump to tag
+nn <M-g> :call JumpToDef()<cr>
+ino <M-g> <esc>:call JumpToDef()<cr>i
+" }}}
 " Vimtex settings {{{
 let g:vimtex_enabled=1
+let g:vimtex_latexmk_continuous=0
 let g:vimtex_compiler_enabled=1
 let g:tex_flavor='tex'
 let g:vimtex_compiler_latexmk ={ 
@@ -327,13 +355,10 @@ let g:vimwiki_list = [{'path': '~/knowledgeBase/',
             \ 'syntax': 'markdown', 'ext': '.md'}]
 let g:vimwiki_global_ext=0
 " }}}
-" Autopairs settings {{{
-let g:AutoPairsFlyMode=1
-" }}}
 " Leader bindings {{{
 "
 " Set map Leader to ,
-let mapleader = 'L'
+let mapleader = ','
 
 nnoremap <Leader>a :argadd <c-r>=fnameescape(expand('%:p:h'))<cr>/*<C-d>
 
