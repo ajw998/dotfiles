@@ -53,7 +53,3 @@ if [ "$TMUX" = '' ]; then
     tmux attach || tmux new 
 fi
 
-if [ "$TERM" = 'screen-256color' ] && [ -n "$TMUX" ]; then
-    conda deactivate
-    conda activate base
-fi
