@@ -3,5 +3,6 @@
 	"suggest.echodocSupport": true,
 	"diagnostic.errorSign": "✘",
 	"diagnostic.infoSign": "•",
-	"diagnostic.warningSign": "!"
+	"diagnostic.warningSign": "!",
+	"eslint.autoFixOnSave": true
 }
