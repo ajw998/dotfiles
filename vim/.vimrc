@@ -51,6 +51,8 @@ filetype plugin indent on
 syntax enable 
 " }}}
 " Editor settings {{{
+set modelines=0
+set shell=/bin/zsh
 set autoindent
 set autoread
 set backspace=indent,eol,start
@@ -103,6 +105,8 @@ set wildmode=list:longest " turn on wild mode full match only"
 " UI Settings {{{
 set number
 set path+=**
+set includeexpr=substitute(substitute(v:fname,'^\\~\/','resources/assets/js/',''),'^\\~sass/\\(.*\\)/\\(.*\\)$','resources/assets/sass/\\1/_\\2','')
+set suffixesadd=.js,.vue,.scss
 set showcmd
 set showmatch
 set laststatus=2
@@ -275,13 +279,13 @@ augroup END
 
 augroup text
     autocmd!
-    autocmd FileType text setlocal listchars= syntax=off spell
+    autocmd FileType text setlocal listchars= syntax=off spell tw=79
 augroup END
 
 " Markdown
 augroup markdown
 	autocmd!
-	autocmd FileType markdown setlocal spell
+	autocmd FileType markdown setlocal spell tw=79
 augroup END
 
 " EJS
@@ -308,6 +312,12 @@ let g:sneak#use_ic_scs=1
 " Use tab for trigger completion with characters ahead and navigate.
 " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
 "})
+"" Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
+xmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
+
+" Remap for do codeAction of current line
+nmap <leader>ac  <Plug>(coc-codeaction)
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 nmap <silent> [c <Plug>(coc-diagnostic-prev)
 nmap <silent> ]c <Plug>(coc-diagnostic-next)
@@ -359,8 +369,6 @@ let g:vimwiki_global_ext=0
 "
 " Set map Leader to ,
 let mapleader = ','
-
-nnoremap <Leader>a :argadd <c-r>=fnameescape(expand('%:p:h'))<cr>/*<C-d>
 
 " Search for files from root directory
 nnoremap <Leader>T :Files ~<CR>
