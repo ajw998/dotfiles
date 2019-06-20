@@ -48,7 +48,6 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
-
-if [ "$TMUX" = '' ]; then
-    tmux attach || tmux new 
+if [ -z "$TMUX" ]; then
+    tmux attach -t default || tmux new -s default
 fi
