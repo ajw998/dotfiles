@@ -1,4 +1,4 @@
-HISTFILE=~/.histfile
+
 HISTSIZE=100
 SAVEHIST=100
 
@@ -52,4 +52,3 @@ unset __conda_setup
 if [ "$TMUX" = '' ]; then
     tmux attach || tmux new 
 fi
-

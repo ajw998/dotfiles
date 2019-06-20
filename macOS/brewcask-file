@@ -1,13 +1,12 @@
+alacritty
 alfred
 anaconda
 android-platform-tools
-dbeaver-community
+chromium
 docker
 font-source-code-pro
-google-chrome
 keepassxc
 mactex
-osxfuse
 qlcolorcode
 qlimagesize
 qlmarkdown
@@ -15,7 +14,9 @@ qlstephen
 qlvideo
 quicklook-json
 quicklookase
-rstudio
-texstudio
+skim
 vlc
+vscodium
 webpquicklook
+wireshark
+zotero

@@ -28,7 +28,6 @@ htop
 httpie
 imageoptim-cli
 jq
-libomp
 libzip
 mariadb
 moreutils
@@ -36,9 +35,11 @@ mpc
 mpd
 mpv
 ncmpcpp
+neofetch
 neovim
+nim
 nmap
-pandoc
+pandoc-citeproc
 poppler
 r
 ripgrep
@@ -51,5 +52,4 @@ vim
 wget
 yarn
 zsh
-zsh-completions
 zsh-syntax-highlighting
