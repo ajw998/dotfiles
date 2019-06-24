@@ -31,6 +31,7 @@ if empty(glob('~/.vim/autoload/plug.vim'))
     autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 call plug#begin('~/.vim/plugged')
+Plug 'sheerun/vim-polyglot'
 Plug '/usr/local/opt/fzf'
 Plug 'arcticicestudio/nord-vim'
 Plug 'joshdick/onedark.vim'
@@ -111,10 +112,10 @@ set suffixesadd=.js,.vue,.scss
 set showcmd
 set showmatch
 set laststatus=2
+set colorcolumn=80
 set list
 set listchars=tab:→\ ,eol:↲,nbsp:␣,trail:•,extends:⟩,precedes:⟨
 set showbreak=↪ 
-set colorcolumn=80
 " }}}
 " Cursor setting {{{
 " highlight Cursor guifg=white guibg=black
@@ -279,16 +280,6 @@ function! UnMinify()
     %s/[^\s]\zs[=&|]\+\ze[^\s]/ \0 /g
     normal ggVG=
 endfunction
-
-" Tabline mapping
-nnoremap th  :tabfirst<CR>
-nnoremap tk  :tabnext<CR>
-nnoremap tj  :tabprev<CR>
-nnoremap tl  :tablast<CR>
-nnoremap tt  :tabedit<Space>
-nnoremap tn  :tabnext<Space>
-nnoremap tm  :tabm<Space>
-nnoremap td  :tabclose<CR>
 " }}}
 " Filetype settings {{{
 " C++
@@ -375,6 +366,9 @@ endf
 " Jump to tag
 nn <M-g> :call JumpToDef()<cr>
 ino <M-g> <esc>:call JumpToDef()<cr>i
+" }}}
+" vim-polyglot settings {{{
+let g:polyglot_disabled = ['markdown']
 " }}}
 " Vimtex settings {{{
 let g:vimtex_enabled=1
