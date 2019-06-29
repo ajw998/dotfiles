@@ -138,7 +138,7 @@ command! -nargs=? -complete=dir Vexplore leftabove vsplit | silent Dirvish <args
 " }}}
 " Folding {{{
 set foldenable
-set foldmethod=manual
+set foldmethod=syntax
 " }}}
 " Theme settings {{{
 "Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
@@ -195,92 +195,6 @@ set statusline+=\ %p                      " Percentage through file in lines
 set statusline+=\ \  
 set statusline+=%3*\ %y\ %*                       " Filetype
 " }}}
-" Custom mappings {{{
-"
-imap jk <Esc>
-nmap ; :
-
-" Moving down visual (screen) lines instead of physical line
-nnoremap j gj
-nnoremap k gk
-
-" Command to toggle colorcolumn
-let &cc = ''
-nnoremap <F2> :let &cc = &cc == '' ? '70,80,90' : ''<CR>
-
-" Open task list
-function! WikiSplit(path)
-    execute "vsplit" a:path
-endfunction
-command! WikiSplit call WikiSplit(TODO_LIST)
-nnoremap TT :WikiSplit<CR>
-
-" Disable Ex mode
-nmap Q <Nop>
-
-" Jump to end of line in insert mode
-inoremap <C-e><C-e> <C-o>$
-
-" Group comment
-" Moving lines
-" TODO - Cross-platform compatibility (this is specifically for macOS)
-" Source: https://vi.stackexchange.com/questions/2674/how-can-i-easily-move-a-line
-nnoremap ∆ :m . +1<CR>==
-nnoremap ˚ :m . -2<CR>==
-vnoremap ∆ :m '>+1<CR>gv=gv
-vnoremap ˚ :m '<-2<CR>gv=gv
-
-" Omnicompletion hotkeys
-inoremap <silent> ,f <C-x><C-f>
-inoremap <silent> ,i <C-x><C-i>
-inoremap <silent> ,l <C-x><C-l>
-inoremap <silent> ,n <C-x><C-n>
-inoremap <silent> ,o <C-x><C-o>
-inoremap <silent> ,t <C-x><C-]>
-inoremap <silent> ,u <C-x><C-u>
-
-" Generate ctags
-nnoremap \r :!ctags -R .<CR>
-" Strip whitespace
-function! StripTrailingWhitespace()
-    if !&binary && &filetype != 'diff'
-        normal mz
-        normal Hmy
-        %s/\s\+$//e
-        normal 'yz<CR>
-        normal `z
-    endif
-endfunction
-command! StripTrailingWhitespace call StripTrailingWhitespace()
-nnoremap <F3> :StripTrailingWhitespace<CR>
-
-" Undo Tree
-nnoremap <F5> :UndotreeToggle<CR>
-
-" Sneak
-nmap <expr> ` sneak#is_sneaking() ? '<Plug>Sneak_;' : '<Tab>'
-
-" Show documentation
-nnoremap <silent> K :call <SID>show_documentation()<CR>
-function! s:show_documentation()
-    if (index(['vim','help'], &filetype) >= 0)
-        execute 'h '.expand('<cword>')
-    else
-        call CocAction('doHover')
-    endif
-endfunction
-
-" Simple re-format for minified Javascript
-command! UnMinify call UnMinify()
-function! UnMinify()
-    %s/{\ze[^\r\n]/{\r/g
-    %s/){/) {/g
-    %s/};\?\ze[^\r\n]/\0\r/g
-    %s/;\ze[^\r\n]/;\r/g
-    %s/[^\s]\zs[=&|]\+\ze[^\s]/ \0 /g
-    normal ggVG=
-endfunction
-" }}}
 " Filetype settings {{{
 " C++
 autocmd FileType c,cpp setlocal path+=/usr/include include&
@@ -325,6 +239,11 @@ let g:undotree_WindowLayout=1
 " }}}
 " Vim Sneak settings {{{
 let g:sneak#use_ic_scs=1
+let g:sneak#label=1
+nmap f <Plug>Sneak_s
+nmap F <Plug>Sneak_S
+" Sneak
+nmap <expr> <Tab> sneak#is_sneaking() ? '<Plug>Sneak_;' : '<Tab>'
 " }}}
 " coc.nvim settings {{{
 " Use tab for trigger completion with characters ahead and navigate.
@@ -383,6 +302,92 @@ let g:vimtex_compiler_latexmk ={
 let g:vimwiki_list = [{'path': '~/knowledgeBase/',
             \ 'syntax': 'markdown', 'ext': '.md'}]
 let g:vimwiki_global_ext=0
+" }}}
+" Custom mappings {{{
+"
+imap jk <Esc>
+nmap ; :
+
+" Moving down visual (screen) lines instead of physical line
+nnoremap j gj
+nnoremap k gk
+
+" Command to toggle colorcolumn
+let &cc = ''
+nnoremap <F2> :let &cc = &cc == '' ? '70,80,90' : ''<CR>
+
+" Open task list
+function! WikiSplit(path)
+    execute "vsplit" a:path
+endfunction
+command! WikiSplit call WikiSplit(TODO_LIST)
+nnoremap TT :WikiSplit<CR>
+
+" Disable Ex mode
+nmap Q <Nop>
+
+" Jump to end of line in insert mode
+inoremap <C-e><C-e> <C-o>$
+
+nnoremap ;; ;
+
+" Group comment
+" Moving lines
+" TODO - Cross-platform compatibility (this is specifically for macOS)
+" Source: https://vi.stackexchange.com/questions/2674/how-can-i-easily-move-a-line
+nnoremap ∆ :m . +1<CR>==
+nnoremap ˚ :m . -2<CR>==
+vnoremap ∆ :m '>+1<CR>gv=gv
+vnoremap ˚ :m '<-2<CR>gv=gv
+
+" Omnicompletion hotkeys
+inoremap <silent> ,f <C-x><C-f>
+inoremap <silent> ,i <C-x><C-i>
+inoremap <silent> ,l <C-x><C-l>
+inoremap <silent> ,n <C-x><C-n>
+inoremap <silent> ,o <C-x><C-o>
+inoremap <silent> ,t <C-x><C-]>
+inoremap <silent> ,u <C-x><C-u>
+
+" Generate ctags
+nnoremap \r :!ctags -R .<CR>
+" Strip whitespace
+function! StripTrailingWhitespace()
+    if !&binary && &filetype != 'diff'
+        normal mz
+        normal Hmy
+        %s/\s\+$//e
+        normal 'yz<CR>
+        normal `z
+    endif
+endfunction
+command! StripTrailingWhitespace call StripTrailingWhitespace()
+nnoremap <F3> :StripTrailingWhitespace<CR>
+
+" Undo Tree
+nnoremap <F5> :UndotreeToggle<CR>
+
+
+" Show documentation
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+function! s:show_documentation()
+    if (index(['vim','help'], &filetype) >= 0)
+        execute 'h '.expand('<cword>')
+    else
+        call CocAction('doHover')
+    endif
+endfunction
+
+" Simple re-format for minified Javascript
+command! UnMinify call UnMinify()
+function! UnMinify()
+    %s/{\ze[^\r\n]/{\r/g
+    %s/){/) {/g
+    %s/};\?\ze[^\r\n]/\0\r/g
+    %s/;\ze[^\r\n]/;\r/g
+    %s/[^\s]\zs[=&|]\+\ze[^\s]/ \0 /g
+    normal ggVG=
+endfunction
 " }}}
 " Leader bindings {{{
 "
