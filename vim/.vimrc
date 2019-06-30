@@ -159,10 +159,14 @@ endif
 " Colourscheme must be declared
 " before setting background to dark
 syntax enable 
-colorscheme onedark 
+try
+	colorscheme onedark 
+	" Transparent background
+	hi Normal guibg=NONE ctermbg=NONE
+catch /^Vim\%((\a\+)\)\=:E185/
+	colorscheme ron
+endtry
 
-" Transparent background
-hi Normal guibg=NONE ctermbg=NONE
 " }}}
 " Statusline settings {{{
 " TODO: Git status, current mode colour 
