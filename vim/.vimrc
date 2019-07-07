@@ -52,9 +52,6 @@ call plug#end()
 filetype plugin indent on
 " }}}
 " Editor settings {{{
-set modelines=0
-set guitablabel=\[%N\]\ %t\ %M 
-set shell=/bin/zsh
 set autoindent
 set autoread
 set backspace=indent,eol,start
@@ -63,18 +60,22 @@ set cmdheight=2
 set cursorline
 set directory=~/.vim/swap
 set encoding=utf-8
+set guitablabel=\[%N\]\ %t\ %M 
 set hidden
 set hlsearch
 set ignorecase
+set incsearch
 set lazyredraw
 set linebreak
 set matchtime=2
+set modelines=0
 set mouse=n
 set nospell
 set novisualbell
 set omnifunc=syntaxcomplete#Complete
 set relativenumber
 set ruler
+set shell=/bin/zsh
 set smartcase
 set splitbelow 
 set splitright
