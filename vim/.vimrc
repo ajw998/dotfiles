@@ -55,7 +55,11 @@ filetype plugin indent on
 set autoindent
 set autoread
 set backspace=indent,eol,start
-set backupdir=/private/tmp
+if has('macunix')
+	set backupdir=/private/tmp
+else
+	set backupdir=~/.vim/backup/
+endif
 set cmdheight=2
 set cursorline
 set directory=~/.vim/swap
