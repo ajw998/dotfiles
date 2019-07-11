@@ -1,6 +1,5 @@
 case $(uname -n) in
 	ubuntu) 
-		echo "This is ubuntu"
 		;;
 	macOS)
 		EDITOR=$(which nvim)
