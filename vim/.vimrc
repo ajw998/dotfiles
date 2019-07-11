@@ -340,10 +340,12 @@ nnoremap ;; ;
 " Moving lines
 " TODO - Cross-platform compatibility (this is specifically for macOS)
 " Source: https://vi.stackexchange.com/questions/2674/how-can-i-easily-move-a-line
-nnoremap ∆ :m . +1<CR>==
-nnoremap ˚ :m . -2<CR>==
-vnoremap ∆ :m '>+1<CR>gv=gv
-vnoremap ˚ :m '<-2<CR>gv=gv
+if has('macunix')
+	nnoremap ∆ :m . +1<CR>==
+	nnoremap ˚ :m . -2<CR>==
+	vnoremap ∆ :m '>+1<CR>gv=gv
+	vnoremap ˚ :m '<-2<CR>gv=gv
+endif
 
 " Omnicompletion hotkeys
 inoremap <silent> ,f <C-x><C-f>
@@ -356,6 +358,7 @@ inoremap <silent> ,u <C-x><C-u>
 
 " Generate ctags
 nnoremap \r :!ctags -R .<CR>
+
 " Strip whitespace
 function! StripTrailingWhitespace()
     if !&binary && &filetype != 'diff'
@@ -371,7 +374,6 @@ nnoremap <F3> :StripTrailingWhitespace<CR>
 
 " Undo Tree
 nnoremap <F5> :UndotreeToggle<CR>
-
 
 " Show documentation
 nnoremap <silent> K :call <SID>show_documentation()<CR>
@@ -436,7 +438,7 @@ nnoremap <Leader>j :Tags<CR>
 " Rename current word (coc.nvim)
 nmap <leader>rn <Plug>(coc-rename)
 
-" Undocumented assignments from plugins
-" <Leader>p - Run Prettier
+" Open register
+nnoremap <leader>R :reg<CR>
 " }}}
 
