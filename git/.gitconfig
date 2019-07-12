@@ -2,8 +2,8 @@
 	email = andrewwong998@gmail.com
 	name = Andrew Wong
 [core]
-	excludesfile = /Users/wongaj/.gitignore_global
-	editor = vim
+	excludesfile = ~/.gitignore_global
+	editor = nvim
 [color]
 	status = auto
 [alias]
