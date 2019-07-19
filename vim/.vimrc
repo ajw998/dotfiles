@@ -1,20 +1,6 @@
-"""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""
 "       VIM SETTINGS        "
 """""""""""""""""""""""""""""
-" Environment values (Must be at the top) {{{
-" Scaffold this as a future foundation for cross-platform setup
-function! Config_setEnv() abort
-    if exists('g:env')
-        return
-    endif
-    if has('win64') || has('win32') || has('win16')
-        let g:env = 'WINDOWS'
-    else
-        let g:env = toupper(substitute(system('uname'), '\n', '', ''))
-    endif
-endfunction
-call Config_setEnv()
-" }}}
 " Pre-plugin settings {{{
 set nocompatible
 filetype off
@@ -33,14 +19,14 @@ endif
 call plug#begin('~/.vim/plugged')
 Plug 'sheerun/vim-polyglot'
 Plug '/usr/local/opt/fzf'
-Plug 'arcticicestudio/nord-vim'
+Plug 'scrooloose/nerdtree'
 Plug 'joshdick/onedark.vim'
+Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release'}
 Plug 'junegunn/fzf.vim'
-Plug 'justinmk/vim-dirvish'
 Plug 'justinmk/vim-sneak'
 Plug 'lervag/vimtex'
 Plug 'mbbill/undotree'
-Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}
+Plug 'neoclide/coc.nvim', {'do': { -> coc#util#build()}}
 Plug 'tommcdo/vim-lion'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-eunuch'
@@ -137,9 +123,6 @@ let g:netrw_altv = 1
 let g:netrw_winsize = 25
 let g:netrw_liststyle = 3
 let g:loaded_netrwPlugin = 1
-command! -nargs=? -complete=dir Explore Dirvish <args>
-command! -nargs=? -complete=dir Sexplore belowright split | silent Dirvish <args>
-command! -nargs=? -complete=dir Vexplore leftabove vsplit | silent Dirvish <args>
 " }}}
 " Folding {{{
 set foldenable
@@ -399,6 +382,9 @@ function! UnMinify()
     %s/[^\s]\zs[=&|]\+\ze[^\s]/ \0 /g
     normal ggVG=
 endfunction
+
+" NerdTREE Toggle
+map <C-n> :NERDTreeToggle<CR>
 " }}}
 " Leader bindings {{{
 "
