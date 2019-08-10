@@ -1,5 +1,7 @@
 aria2
+arp-scan
 aspell
+aws-elasticbeanstalk
 bash-completion
 ccls
 cmake
@@ -41,10 +43,13 @@ nim
 nmap
 pandoc-citeproc
 poppler
+protobuf
 r
+rbenv
 ripgrep
 s-lang
 stow
+syncthing
 telnet
 tmux
 tree
