@@ -21,19 +21,16 @@ Plug 'sheerun/vim-polyglot'
 Plug '/usr/local/opt/fzf'
 Plug 'scrooloose/nerdtree'
 Plug 'joshdick/onedark.vim'
-Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release'}
 Plug 'junegunn/fzf.vim'
 Plug 'justinmk/vim-sneak'
 Plug 'lervag/vimtex'
 Plug 'mbbill/undotree'
-Plug 'neoclide/coc.nvim', {'do': { -> coc#util#build()}}
-Plug 'tommcdo/vim-lion'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'vimwiki/vimwiki'
-Plug 'zah/nim.vim'
 call plug#end()
 filetype plugin indent on
 " }}}
