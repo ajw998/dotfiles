@@ -122,8 +122,8 @@ let g:netrw_liststyle = 3
 let g:loaded_netrwPlugin = 1
 " }}}
 " Folding {{{
-set foldenable
-set foldmethod=syntax
+" set foldenable
+" set foldmethod=syntax
 " }}}
 " Theme settings {{{
 "Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
