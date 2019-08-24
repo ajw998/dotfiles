@@ -58,3 +58,6 @@ zstyle ':vcs_info:git:*' formats '%b'
 if [ -z "$TMUX" ]; then
     tmux attach -t default || tmux new -s default
 fi
+
+# Initialise rbenv
+eval "$(rbenv init -)"
