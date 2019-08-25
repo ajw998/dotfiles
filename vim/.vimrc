@@ -23,7 +23,6 @@ Plug 'scrooloose/nerdtree'
 Plug 'joshdick/onedark.vim'
 Plug 'junegunn/fzf.vim'
 Plug 'justinmk/vim-sneak'
-Plug 'lervag/vimtex'
 Plug 'mbbill/undotree'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'tpope/vim-commentary'
@@ -278,20 +277,6 @@ ino <M-g> <esc>:call JumpToDef()<cr>i
 " vim-polyglot settings {{{
 let g:polyglot_disabled = ['markdown']
 " }}}
-" Vimtex settings {{{
-let g:vimtex_enabled=1
-let g:vimtex_latexmk_continuous=0
-let g:vimtex_compiler_enabled=1
-let g:tex_flavor='tex'
-let g:vimtex_compiler_latexmk ={ 
-            \'build_dir' : 'build'    
-            \}
-" }}}
-" Vimwiki settings {{{
-let g:vimwiki_list = [{'path': '~/knowledgeBase/',
-            \ 'syntax': 'markdown', 'ext': '.md'}]
-let g:vimwiki_global_ext=0
-" }}}
 " Custom mappings {{{
 "
 imap jk <Esc>
@@ -322,7 +307,6 @@ nnoremap ;; ;
 
 " Group comment
 " Moving lines
-" TODO - Cross-platform compatibility (this is specifically for macOS)
 " Source: https://vi.stackexchange.com/questions/2674/how-can-i-easily-move-a-line
 if has('macunix')
 	nnoremap ∆ :m . +1<CR>==
