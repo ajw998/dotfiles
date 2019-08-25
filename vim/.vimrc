@@ -233,6 +233,11 @@ nmap F <Plug>Sneak_S
 " Sneak
 nmap <expr> <Tab> sneak#is_sneaking() ? '<Plug>Sneak_;' : '<Tab>'
 " }}}
+" Vimwiki {{{
+let g:vimwiki_list = [{'path': '~/knowledgeBase/', 
+			\ 'syntax': 'markdown', 'ext': '.md'}]
+let g:vimwiki_global_ext = 0
+" }}}
 " coc.nvim settings {{{
 " Use tab for trigger completion with characters ahead and navigate.
 " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
