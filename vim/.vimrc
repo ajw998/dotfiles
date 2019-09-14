@@ -19,7 +19,6 @@ endif
 call plug#begin('~/.vim/plugged')
 Plug 'sheerun/vim-polyglot'
 Plug '/usr/local/opt/fzf'
-Plug 'scrooloose/nerdtree'
 Plug 'joshdick/onedark.vim'
 Plug 'junegunn/fzf.vim'
 Plug 'justinmk/vim-sneak'
@@ -30,6 +29,7 @@ Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'vimwiki/vimwiki'
+Plug 'kkoomen/vim-doge'
 call plug#end()
 filetype plugin indent on
 " }}}
@@ -118,7 +118,6 @@ let g:netrw_browse_split = 4
 let g:netrw_altv = 1
 let g:netrw_winsize = 25
 let g:netrw_liststyle = 3
-let g:loaded_netrwPlugin = 1
 " }}}
 " Folding {{{
 " set foldenable
@@ -369,8 +368,6 @@ function! UnMinify()
     normal ggVG=
 endfunction
 
-" NerdTREE Toggle
-map <C-n> :NERDTreeToggle<CR>
 " }}}
 " Leader bindings {{{
 "
