@@ -1,7 +1,6 @@
 # alias l='ls -Xlah --time-style=+"%Y-%m-%d" --color=auto -F'
 alias -g latest='*(om[1])'
 alias :q='exit'
-alias cal='cal -3m'
 alias grep='grep --color=always'
 alias l='exa -lah'
 alias mp='mpc toggle'
