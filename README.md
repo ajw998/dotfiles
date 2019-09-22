@@ -1,6 +1,6 @@
 # Dotfiles
 
-Personal dotfiles for macOS and Ubuntu.
+Personal dotfiles for macOS. 
 
 ## Installation
 
