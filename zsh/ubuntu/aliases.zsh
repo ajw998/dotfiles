@@ -1,5 +1,0 @@
-alias l='exa -lah'
-alias :q='exit'
-alias rf='source $HOME/.zshrc'
-alias vim='nvim'
-alias v='nvim'
