@@ -25,9 +25,6 @@ case $(uname -n) in
 	unset __conda_setup
 	# <<< conda initialize <<<
 		;;
-	ubuntu)
-		printf "Ubuntu-specific settings here"
-		;;
 esac
 
 
