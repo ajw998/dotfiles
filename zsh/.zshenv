@@ -1,6 +1,4 @@
 case $(uname -n) in
-	ubuntu) 
-		;;
 	macOS)
 		EDITOR=$(which nvim)
 		FZF_DEFAULT_COMMAND='fd --type f --hidden' 
