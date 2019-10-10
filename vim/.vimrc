@@ -22,9 +22,9 @@ Plug '/usr/local/opt/fzf'
 Plug 'joshdick/onedark.vim'
 Plug 'junegunn/fzf.vim'
 Plug 'justinmk/vim-sneak'
-Plug 'itchyny/lightline.vim'
 Plug 'mbbill/undotree'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-surround'
@@ -104,6 +104,7 @@ set colorcolumn=80
 set list
 set listchars=tab:→\ ,eol:↲,nbsp:␣,trail:•,extends:⟩,precedes:⟨
 set showbreak=↪ 
+set wildmode=full
 " }}}
 " Cursor setting {{{
 " highlight Cursor guifg=white guibg=black
@@ -153,37 +154,36 @@ catch /^Vim\%((\a\+)\)\=:E185/
 endtry
 " }}}
 " Statusline settings {{{
-" " Highlighting groups
-" let g:currentmode={ 'n' : 'Normal ', 'no' : 'N·Operator Pending ', 'v' : 'Visual ', 'V' : 'V·Line ', '^V' : 'V·Block ', 's' : 'Select ', 'S': 'S·Line ', '^S' : 'S·Block ', 'i' : 'Insert ', 'R' : 'Replace ', 'Rv' : 'V·Replace ', 'c' : 'Command ', 'cv' : 'Vim Ex ', 'ce' : 'Ex ', 'r' : 'Prompt ', 'rm' : 'More ', 'r?' : 'Confirm ', '!' : 'Shell ', 't' : 'Terminal '}
-" function! ModeCurrent() abort
-"     let l:modecurrent = mode()
-"     let l:modelist = toupper(get(g:currentmode, l:modecurrent, 'V·Block '))
-"     let l:current_status_mode = l:modelist
-"     return l:current_status_mode
-" endfunction
+au InsertEnter * hi User1 guifg=black guibg=#d7afff ctermfg=black ctermbg=blue
+au InsertLeave * hi User1 guifg=black guibg=#8fbfdc ctermfg=black ctermbg=green
 
-" hi User1 cterm=bold
-" " hi User3 ctermfg=white ctermbg=12
-" " Status bar colour change
-" if version >= 700
-"     " Pass
-"     " See this https://stackoverflow.com/questions/11147157/vim-change-the-status-line-color-in-insert-mode
-"     endif
-" set statusline=
-" set statusline+=%1*\ %{ModeCurrent()}\%*      " Show current mode
-" set statusline+=\ \  
-" set statusline+=%f                      " Current file path
-" set statusline+=\ \  
-" set statusline+=%m                      " Modified flag
-" set statusline+=%=                      " Switch to the right side
-" set statusline+=%l:%L
-" set statusline+=\ \  
-" set statusline+=\ %p                      " Percentage through file in lines
-" set statusline+=\ \  
-" set statusline+=%3*\ %y\ %*                       " Filetype
-let g:lightline = {
-      \ 'colorscheme': 'onedark',
-      \ } 
+let g:currentmode={ 'n' : 'Normal', 'no' : 'N·Operator Pending', 'v' : 'Visual', 'V' : 'V·Line', '^V' : 'V·Block', 's' : 'Select', 'S': 'S·Line', '^S' : 'S·Block', 'i' : 'Insert', 'R' : 'Replace ', 'Rv' : 'V·Replace ', 'c' : 'Command ', 'cv' : 'Vim Ex ', 'ce' : 'Ex ', 'r' : 'Prompt ', 'rm' : 'More ', 'r?' : 'Confirm ', '!' : 'Shell ', 't' : 'Terminal '}
+function! ModeCurrent() abort
+    let l:modecurrent = mode()
+    let l:modelist = toupper(get(g:currentmode, l:modecurrent, 'V·Block '))
+    let l:current_status_mode = l:modelist
+    return l:current_status_mode
+endfunction
+
+hi User1 cterm=bold guifg=black guibg=#8fbfdc ctermfg=black ctermbg=green
+
+" Status bar colour change
+if version >= 700
+    " Pass
+    " See this https://stackoverflow.com/questions/11147157/vim-change-the-status-line-color-in-insert-mode
+    endif
+set statusline=
+set statusline+=%1*\ %{ModeCurrent()}\        " Show current mode
+set statusline+=%2*\ %f\                      " Current file path
+set statusline+=%3*\ %{FugitiveStatusline()}
+set statusline+=%m                            " Modified flag
+set statusline+=%=                            " Switch to the right side
+set statusline+=%l:%L
+set statusline+=\ \  
+set statusline+=\ %p                          " Percentage through file in lines
+set statusline+=\ \  
+set statusline+=%3*\ %y\ %*                   " Filetype
+set noshowmode                                " Remove --INSERT-- on statusline
 " }}}
 " Filetype settings {{{
 " C++
@@ -416,5 +416,11 @@ nmap <leader>rn <Plug>(coc-rename)
 
 " Open register
 nnoremap <leader>R :reg<CR>
+
+" Controlling tabs
+nnoremap <C-h> :tabprevious<CR>
+nnoremap <C-l> :tabnext<CR>
+nnoremap <silent> <A-h> :execute 'silent! tabmove ' . (tabpagenr()-2)<CR>
+nnoremap <silent> <A-l> :execute 'silent! tabmove ' . (tabpagenr()+1)<CR>
 " }}}
 
