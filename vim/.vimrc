@@ -426,5 +426,8 @@ nnoremap <silent> <A-l> :execute 'silent! tabmove ' . (tabpagenr()+1)<CR>
 
 " Git Messenger
 nnoremap <Leader>gm <Plug>(git-messenger)
+
+" Open netrw in current directory with - 
+nnoremap - :e %:p:h<CR>
 " }}}
 
