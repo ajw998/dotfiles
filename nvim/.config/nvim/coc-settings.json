@@ -4,5 +4,12 @@
 	"diagnostic.errorSign": "✘",
 	"diagnostic.infoSign": "•",
 	"diagnostic.warningSign": "!",
-	"eslint.autoFixOnSave": true
+	"eslint.autoFixOnSave": true,
+	 "languageserver": {
+    "golang": {
+      "command": "gopls",
+      "rootPatterns": ["go.mod"],
+      "filetypes": ["go"]
+    }
+  }
 }

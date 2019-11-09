@@ -17,21 +17,22 @@ if empty(glob('~/.vim/autoload/plug.vim'))
     autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 call plug#begin('~/.vim/plugged')
-Plug 'sheerun/vim-polyglot'
 Plug '/usr/local/opt/fzf'
+Plug 'fatih/vim-go'
 Plug 'joshdick/onedark.vim'
 Plug 'junegunn/fzf.vim'
 Plug 'justinmk/vim-sneak'
+Plug 'kkoomen/vim-doge'
 Plug 'mbbill/undotree'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'tpope/vim-fugitive'
+Plug 'rhysd/git-messenger.vim'
+Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-eunuch'
+Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
-Plug 'rhysd/git-messenger.vim'
 Plug 'tpope/vim-unimpaired'
 Plug 'vimwiki/vimwiki'
-Plug 'kkoomen/vim-doge'
 call plug#end()
 filetype plugin indent on
 " }}}
