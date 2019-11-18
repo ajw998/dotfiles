@@ -225,6 +225,7 @@ au BufNewFile,BufRead * if &syntax == '' | set syntax=markdown | endif
 " Proper PEP8 implementation for python
 autocmd BufNewFile,BufRead *.py
             \  setlocal tabstop=4 softtabstop=4 shiftwidth=4 textwidth=79 expandtab autoindent
+
 " }}}
 " Undotree settings {{{
 let g:undotree_WindowLayout=1
@@ -282,6 +283,10 @@ endf
 " Jump to tag
 nn <M-g> :call JumpToDef()<cr>
 ino <M-g> <esc>:call JumpToDef()<cr>i
+" }}}
+" Vim-go {{{
+let g:go_def_mode='gopls'
+let g:go_info_mode='gopls'
 " }}}
 " vim-polyglot settings {{{
 let g:polyglot_disabled = ['markdown']
