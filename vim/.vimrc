@@ -378,6 +378,9 @@ function! UnMinify()
     normal ggVG=
 endfunction
 
+" Snap out of autocomplete brackets
+inoremap <C-e> <C-o>$
+
 " }}}
 " Leader bindings {{{
 "
