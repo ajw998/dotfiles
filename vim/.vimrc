@@ -23,6 +23,7 @@ Plug 'joshdick/onedark.vim'
 Plug 'junegunn/fzf.vim'
 Plug 'justinmk/vim-sneak'
 Plug 'kkoomen/vim-doge'
+Plug 'mattn/emmet-vim'
 Plug 'mbbill/undotree'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'rhysd/git-messenger.vim'
@@ -260,29 +261,36 @@ xmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>f  <Plug>(coc-format-selected)
 nmap <silent> gr <Plug>(coc-references)
 inoremap <silent><expr> <TAB>
-            \ pumvisible() ? "\<C-n>" :
-            \ <SID>check_back_space() ? "\<TAB>" :
-            \ coc#refresh()
+			\ pumvisible() ? "\<C-n>" :
+			\ <SID>check_back_space() ? "\<TAB>" :
+			\ coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 function! s:check_back_space() abort
-    let col = col('.') - 1
-    return !col || getline('.')[col - 1]  =~# '\s'
+	let col = col('.') - 1
+	return !col || getline('.')[col - 1]  =~# '\s'
 endfunction"
 
 " Close preview window when done
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 fun! JumpToDef()
-  if exists("*GotoDefinition_" . &filetype)
-    call GotoDefinition_{&filetype}()
-  else
-    exe "norm! \<C-]>"
-  endif
+	if exists("*GotoDefinition_" . &filetype)
+		call GotoDefinition_{&filetype}()
+	else
+		exe "norm! \<C-]>"
+	endif
 endf
 
 " Jump to tag
+nmap <silent> gd <Plug>(coc-definition)
 nn <M-g> :call JumpToDef()<cr>
 ino <M-g> <esc>:call JumpToDef()<cr>i
+
+" View all errors
+nnoremap <silent> <leader>cl  :<C-u>CocList locationlist<CR>
+
+" Highlight symbol under cursor
+nnoremap <silent> <leader>cs :<C-u>CocList -I symbols<CR>
 " }}}
 " Vim-go {{{
 let g:go_def_mode='gopls'
@@ -290,6 +298,15 @@ let g:go_info_mode='gopls'
 " }}}
 " vim-polyglot settings {{{
 let g:polyglot_disabled = ['markdown']
+" }}}
+" emmet.vim settings {{{
+let g:user_emmet_leader_key='<C-f>'
+let g:user_emmet_settings = {
+\  'javascript.jsx' : {
+\      'extends': 'jsx',
+\      'quote_char': "'",
+\  },
+\}
 " }}}
 " Custom mappings {{{
 "
