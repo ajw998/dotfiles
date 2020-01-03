@@ -11,3 +11,4 @@ alias update='sudo softwareupdate -i -a; brew upgrade; brew update; brew cleanup
 alias v='nvim'
 alias vim='nvim'
 alias t='task'
+alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
