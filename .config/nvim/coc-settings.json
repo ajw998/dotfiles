@@ -1,0 +1,15 @@
+{
+	"coc.source.buffer.disableSyntaxes": ["comment"],
+	"suggest.echodocSupport": true,
+	"diagnostic.errorSign": "✘",
+	"diagnostic.infoSign": "•",
+	"diagnostic.warningSign": "!",
+	"eslint.autoFixOnSave": true,
+	 "languageserver": {
+    "golang": {
+      "command": "gopls",
+      "rootPatterns": ["go.mod"],
+      "filetypes": ["go"]
+    }
+  }
+}
