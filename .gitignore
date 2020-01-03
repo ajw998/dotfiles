@@ -2,4 +2,5 @@ mpd/.mpd/
 vim/.vim/autoload/
 vim/.vim/plugged/
 vim/.vim/.netrwhist
-ncmpcpp/.ncmpcpp/lyrics
+.ncmpcpp/lyrics
+
