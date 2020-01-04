@@ -31,7 +31,7 @@ esac
 setopt prompt_subst
 PROMPT='%F{red}%B%n%b%f@[%F{yellow}%B%1~%b%f]%# '
 
-config_files=(~/dotfiles/zsh/$(uname -n)/*.zsh)
+config_files=($HOME/zsh/*.zsh)
 
 for file in ${config_files}
 do
@@ -43,7 +43,7 @@ compinit -C
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'
 
 # Git prompt
-source $HOME/dotfiles/zsh/git-prompt.sh
+source $HOME/zsh/git-prompt.sh
 
 autoload -Uz vcs_info
 precmd_vcs_info() { vcs_info }
