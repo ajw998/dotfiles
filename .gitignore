@@ -1,4 +1,7 @@
-mpd/.mpd/
+.mpd/mpd.db
+.mpd/mpd.log
+.mpd/mpd.pid
+.mpd/mpdstate
 vim/.vim/autoload/
 vim/.vim/plugged/
 vim/.vim/.netrwhist
