@@ -64,3 +64,6 @@ fi
 
 # Initialise rbenv
 eval "$(rbenv init -)"
+
+# FZF-mark
+source $HOME/bin/fzf-mark/fzf-marks.plugin.zsh
