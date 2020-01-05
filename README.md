@@ -1,27 +1,40 @@
 # Dotfiles
 
-Personal dotfiles for macOS.
+Personal dotfiles for macOS
 
-![Screenshot](./assets/screenshot.png)
+## Dependencies
 
-## Installation
+* `git`
 
-1. Clone this repository
-2. Setup `stow`
-3. Install the desired settings using `stow <directory>`
+## Setup 
 
-## Editor Settings
+The command belows uses `config` as a custom alias to configure dotfiles. You
+may, however, use any alias you like.
 
-### Neovim
+```bash
+git init --bare $HOME/.cfg
+alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+config remote add origin git@github.com:ajw998/dotfiles.git
+```
 
-See `nvim/` directory
+Ensure that you hide files that you are not explicitly tracking with the
+following:
 
-### Visual Studio Code
+```bash
+config config --local status.showUntrackedFiles no
+```
 
-Visual Studio Code is no longer my main editor, but it is still useful for me
-to quickly view and editor files.
+To track a new file, run `config` like any other `git` commands:
 
-See settings [here](https://gist.github.com/ajw998/9eca8ae0422e1a56431c550598c9387f) (Generated using [Settings Sync](https://marketplace.visualstudio.com/items?itemName=Shan.code-settings-sync))
+```bash
+config status
+config add .gitignore
+config commit -m "Add .gitignore"
+config push
+```
+## Updating subtree repository from upstream
+
+## Settings and Configurations
 
 ## LICENSE
 
