@@ -4,6 +4,9 @@ Personal dotfiles for macOS
 
 ## Dependencies
 
+If you are on macOS, please ensure you have installed XCode CLI tools before
+continuing. You may do so using this command: `xcode-select --install`.
+
 * `git`
 
 ## Setup 
@@ -34,7 +37,26 @@ config push
 ```
 ## Updating subtree repository from upstream
 
+Run the following command:
+
+```bash
+git subtree pull --prefix [local subtree] [upstream] master --squash
+```
+
 ## Settings and Configurations
+
+This dotfile repository provides customisation for the following: 
+
+* `bash`
+* `curl`
+* `fd`
+* `git`
+* `macOS`
+* `neovim`
+* `ripgrep`
+* `tmux`
+* `vim`
+* `zsh`
 
 ## LICENSE
 
