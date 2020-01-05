@@ -56,6 +56,7 @@ This dotfile repository provides customisation for the following:
 * `ripgrep`
 * `tmux`
 * `vim`
+* Visual Studio Codium
 * `zsh`
 
 ## LICENSE
