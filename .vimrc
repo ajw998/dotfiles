@@ -19,7 +19,9 @@ endif
 call plug#begin('~/.vim/plugged')
 Plug '/usr/local/opt/fzf'
 Plug 'fatih/vim-go'
+Plug 'heavenshell/vim-jsdoc'
 Plug 'joshdick/onedark.vim'
+Plug 'junegunn/fzf', { 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
 Plug 'justinmk/vim-sneak'
 Plug 'kkoomen/vim-doge'
@@ -307,6 +309,10 @@ let g:user_emmet_settings = {
 \      'quote_char': "'",
 \  },
 \}
+" }}}
+" FZF settings {{{
+" Enable popup
+let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
 " }}}
 " Custom mappings {{{
 "
