@@ -8,12 +8,13 @@
 .config
 .git
 .ipython
-.npm
 .node-gyp
+.npm
 .npm_cache
 .rstudio-desktop
 .vim/plugged
 .vscode
 Library/
 Lightroom/
+Pictures
 node_modules/
