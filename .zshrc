@@ -8,10 +8,10 @@ case $(uname -n) in
 	export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
 	export PATH="/usr/local/opt/findutils/libexec/gnubin:$PATH"
 	export PATH="/bin:$PATH"
-	source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh && [ -f ~/bin/.fzf.zsh ] && source ~/bin/.fzf.zsh
-	;;
+	source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh  
+	[ -f ~/bin/.fzf.zsh ] && source ~/bin/.fzf.zsh
+		;;
 esac
-
 
 setopt prompt_subst
 PROMPT='%F{red}%B%n%b%f@[%F{yellow}%B%1~%b%f]%# '
@@ -46,6 +46,9 @@ export NVM_DIR="$HOME/.nvm"
 if [ -z "$TMUX" ]; then
     tmux attach -t default || tmux new -s default
 fi
+
+# Initialise rbenv
+eval "$(rbenv init -)"
 
 # FZF-mark
 source $HOME/bin/fzf-mark/fzf-marks.plugin.zsh
