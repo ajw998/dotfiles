@@ -18,6 +18,7 @@ may, however, use any alias you like.
 git init --bare $HOME/.cfg
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 config remote add origin git@github.com:ajw998/dotfiles.git
+config checkout
 ```
 
 Ensure that you hide files that you are not explicitly tracking with the
