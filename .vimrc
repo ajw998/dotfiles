@@ -314,6 +314,18 @@ let g:user_emmet_settings = {
 " Enable popup
 let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
 " }}}
+" Alternate files {{{
+" Run a given vim command on the results of alt from a given path.
+" See usage below.
+function! AltCommand(path, vim_command)
+  let l:alternate = system("alt " . a:path)
+  if empty(l:alternate)
+    echo "No alternate file for " . a:path . " exists!"
+  else
+    exec a:vim_command . " " . l:alternate
+  endif
+endfunction
+" }}}
 " Custom mappings {{{
 "
 imap jk <Esc>
@@ -461,5 +473,8 @@ nnoremap <Leader>gm <Plug>(git-messenger)
 
 " Open netrw in current directory with - 
 nnoremap - :e %:p:h<CR>
+
+" Open alternate file
+nnoremap <Leader>al :w<cr>:call AltCommand(expand('%'), ':e')<cr>
 " }}}
 
