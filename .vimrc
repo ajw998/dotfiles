@@ -476,5 +476,12 @@ nnoremap - :e %:p:h<CR>
 
 " Open alternate file
 nnoremap <Leader>al :w<cr>:call AltCommand(expand('%'), ':e')<cr>
+
+
+" Ripgrep find word under cursor 
+nnoremap <leader>f :Rg <C-R>=expand("<cword>")<CR><CR>
+
+" Copy current file path
+nnoremap <leader>cp :let @*=expand("%:p")<CR>
 " }}}
 
