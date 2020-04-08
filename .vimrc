@@ -479,9 +479,12 @@ nnoremap <Leader>al :w<cr>:call AltCommand(expand('%'), ':e')<cr>
 
 
 " Ripgrep find word under cursor 
-nnoremap <leader>f :Rg <C-R>=expand("<cword>")<CR><CR>
+nnoremap <Leader>f :Rg <C-R>=expand("<cword>")<CR><CR>
 
 " Copy current file path
 nnoremap <leader>cp :let @*=expand("%:p")<CR>
+
+" Vim fugitive (git-write)
+nnoremap <Leader>gw :Gwrite<CR>
 " }}}
 
