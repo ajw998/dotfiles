@@ -8,6 +8,7 @@ case $(uname -n) in
 	export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
 	export PATH="/usr/local/opt/findutils/libexec/gnubin:$PATH"
 	export PATH="/bin:$PATH"
+	export PATH="/usr/local/opt/openjdk/bin:$PATH"
 	source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh  
 	[ -f ~/bin/.fzf.zsh ] && source ~/bin/.fzf.zsh
 		;;
