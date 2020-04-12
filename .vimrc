@@ -18,7 +18,6 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 call plug#begin('~/.vim/plugged')
 Plug '/usr/local/opt/fzf'
-Plug 'fatih/vim-go'
 Plug 'heavenshell/vim-jsdoc'
 Plug 'joshdick/onedark.vim'
 Plug 'junegunn/fzf', { 'do': './install --bin' }
@@ -194,10 +193,6 @@ set noshowmode                                " Remove --INSERT-- on statusline
 " C++
 autocmd FileType c,cpp setlocal path+=/usr/include include&
 
-" Markdown
-autocmd FileType markdown let b:coc_suggest_disable = 1
-autocmd FileType vimwiki let b:coc_suggest_disable = 1
-
 " vimrc
 augroup vim
     autocmd!
@@ -212,7 +207,9 @@ augroup END
 " Markdown
 augroup markdown
 	autocmd!
+	autocmd FileType markdown let b:coc_suggest_disable = 1
 	autocmd FileType markdown setlocal spell tw=79
+	autocmd FileType vimwiki let b:coc_suggest_disable = 1
 augroup END
 
 " EJS
@@ -293,10 +290,6 @@ nnoremap <silent> <leader>cl  :<C-u>CocList locationlist<CR>
 
 " Highlight symbol under cursor
 nnoremap <silent> <leader>cs :<C-u>CocList -I symbols<CR>
-" }}}
-" Vim-go {{{
-let g:go_def_mode='gopls'
-let g:go_info_mode='gopls'
 " }}}
 " vim-polyglot settings {{{
 let g:polyglot_disabled = ['markdown']
@@ -484,7 +477,10 @@ nnoremap <Leader>f :Rg <C-R>=expand("<cword>")<CR><CR>
 " Copy current file path
 nnoremap <leader>cp :let @*=expand("%:p")<CR>
 
-" Vim fugitive (git-write)
+" Vim fugitive (git-stage)
 nnoremap <Leader>gw :Gwrite<CR>
+
+" Vim fugitive (git-commit)
+nnoremap <Leader>gc :Gcommit<CR>
 " }}}
 
