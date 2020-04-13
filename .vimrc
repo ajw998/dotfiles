@@ -428,7 +428,7 @@ nnoremap <Leader>b :Buffers<CR>
 nnoremap <Leader>q :b#<CR>
 
 " Close buffer
-nnoremap <leader>x :bd<CR>
+nnoremap <Leader>x :bd<CR>
 
 " Opening a single file
 nnoremap <Leader>e :e **/
@@ -472,7 +472,10 @@ nnoremap <Leader>al :w<cr>:call AltCommand(expand('%'), ':e')<cr>
 
 
 " Ripgrep find word under cursor 
-nnoremap <Leader>f :Rg <C-R>=expand("<cword>")<CR><CR>
+nnoremap <Leader>fw :Rg <C-R>=expand("<cword>")<CR><CR>
+
+" Ripgrep for something else
+nnoremap <Leader>ff :Rg 
 
 " Copy current file path
 nnoremap <leader>cp :let @*=expand("%:p")<CR>
@@ -482,5 +485,9 @@ nnoremap <Leader>gw :Gwrite<CR>
 
 " Vim fugitive (git-commit)
 nnoremap <Leader>gc :Gcommit<CR>
+
+" Execute the line under cursor
+nnoremap <Leader>e :exe getline(line('.'))<CR>
+
 " }}}
 
