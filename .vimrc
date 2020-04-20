@@ -24,17 +24,15 @@ Plug 'junegunn/fzf', { 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
 Plug 'justinmk/vim-sneak'
 Plug 'kkoomen/vim-doge'
+Plug 'kovisoft/slimv'
 Plug 'mattn/emmet-vim'
-Plug 'mbbill/undotree'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'rhysd/git-messenger.vim'
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
-Plug 'vimwiki/vimwiki'
 call plug#end()
 filetype plugin indent on
 " }}}
@@ -227,9 +225,6 @@ autocmd BufNewFile,BufRead *.py
             \  setlocal tabstop=4 softtabstop=4 shiftwidth=4 textwidth=79 expandtab autoindent
 
 " }}}
-" Undotree settings {{{
-let g:undotree_WindowLayout=1
-" }}}
 " Vim Sneak settings {{{
 let g:sneak#use_ic_scs=1
 let g:sneak#label=1
@@ -237,11 +232,6 @@ nmap f <Plug>Sneak_s
 nmap F <Plug>Sneak_S
 " Sneak
 nmap <expr> <Tab> sneak#is_sneaking() ? '<Plug>Sneak_;' : '<Tab>'
-" }}}
-" Vimwiki {{{
-let g:vimwiki_list = [{'path': '~/knowledgeBase/', 
-			\ 'syntax': 'markdown', 'ext': '.md'}]
-let g:vimwiki_global_ext = 0
 " }}}
 " coc.nvim settings {{{
 " Use tab for trigger completion with characters ahead and navigate.
@@ -306,6 +296,9 @@ let g:user_emmet_settings = {
 " FZF settings {{{
 " Enable popup
 let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
+" }}}
+" Common Lisp (Slimv) {{{
+let g:lisp_rainbow=1
 " }}}
 " Alternate files {{{
 " Run a given vim command on the results of alt from a given path.
@@ -460,9 +453,6 @@ nnoremap <C-h> :tabprevious<CR>
 nnoremap <C-l> :tabnext<CR>
 nnoremap <silent> <A-h> :execute 'silent! tabmove ' . (tabpagenr()-2)<CR>
 nnoremap <silent> <A-l> :execute 'silent! tabmove ' . (tabpagenr()+1)<CR>
-
-" Git Messenger
-nnoremap <Leader>gm <Plug>(git-messenger)
 
 " Open netrw in current directory with - 
 nnoremap - :e %:p:h<CR>
