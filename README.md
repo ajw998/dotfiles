@@ -4,10 +4,10 @@ Personal dotfiles for macOS
 
 ## Dependencies
 
-If you are on macOS, please ensure you have installed XCode CLI tools before
-continuing. You may do so using this command: `xcode-select --install`.
+The only dependency you need is `git`.
 
-* `git`
+Please ensure you have installed Xcode CLI tools before continuing. You may do
+so using this command: `xcode-select --install`.
 
 ## Setup 
 
@@ -36,13 +36,6 @@ config add .gitignore
 config commit -m "Add .gitignore"
 config push
 ```
-## Updating subtree repository from upstream
-
-Run the following command:
-
-```bash
-git subtree pull --prefix [local subtree] [upstream] master --squash
-```
 
 ## Settings and Configurations
 
@@ -57,9 +50,9 @@ This dotfile repository provides customisation for the following:
 * `ripgrep`
 * `tmux`
 * `vim`
-* Visual Studio Codium
+* `code` 
 * `zsh`
 
 ## LICENSE
 
-GPL
+[WTFPL](http://www.wtfpl.net/)
