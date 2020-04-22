@@ -325,13 +325,6 @@ nnoremap k gk
 let &cc = ''
 nnoremap <F2> :let &cc = &cc == '' ? '70,80,90' : ''<CR>
 
-" Open task list
-function! WikiSplit(path)
-    execute "vsplit" a:path
-endfunction
-command! WikiSplit call WikiSplit(TODO_LIST)
-nnoremap TT :WikiSplit<CR>
-
 " Disable Ex mode
 nmap Q <Nop>
 
