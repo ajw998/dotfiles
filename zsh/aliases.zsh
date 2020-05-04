@@ -13,5 +13,3 @@ alias update='sudo softwareupdate -i -a; brew upgrade; brew update; brew cleanup
 # Apart from vi (this is the fallback)
 alias v='nvim'
 alias vim='nvim'
-# Always run emacs in the background
-alias emacs='emacs &'
