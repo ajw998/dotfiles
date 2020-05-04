@@ -15,12 +15,10 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 call plug#begin('~/.vim/plugged')
 Plug '/usr/local/opt/fzf'
-Plug 'heavenshell/vim-jsdoc'
 Plug 'joshdick/onedark.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'justinmk/vim-sneak'
-Plug 'kovisoft/slimv'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-commentary'
@@ -182,9 +180,6 @@ set statusline+=%3*\ %y\ %*                   " Filetype
 set noshowmode                                " Remove --INSERT-- on statusline
 " }}}
 " Filetype settings {{{
-" C++
-autocmd FileType c,cpp setlocal path+=/usr/include include&
-
 " vimrc
 augroup vim
     autocmd!
@@ -199,6 +194,8 @@ augroup END
 " Markdown
 augroup markdown
 	autocmd!
+	autocmd BufNewFile,BufRead *.markdown set ft=markdown
+	autocmd BufNewFile,BufRead *.md set ft=markdown
 	autocmd FileType markdown let b:coc_suggest_disable = 1
 	autocmd FileType markdown setlocal spell tw=79
 	autocmd FileType vimwiki let b:coc_suggest_disable = 1
@@ -206,13 +203,6 @@ augroup END
 
 " EJS
 autocmd BufNewFile,BufRead *.ejs set ft=html
-
-" Vimrc
-autocmd BufNewFile,BufRead *.markdown set ft=markdown
-autocmd BufNewFile,BufRead *.md set ft=markdown
-
-" Syntax coercion (default to markdown)
-au BufNewFile,BufRead * if &syntax == '' | set syntax=markdown | endif
 
 " Proper PEP8 implementation for python
 autocmd BufNewFile,BufRead *.py
@@ -278,21 +268,9 @@ nnoremap <silent> <leader>cs :<C-u>CocList -I symbols<CR>
 " vim-polyglot settings {{{
 let g:polyglot_disabled = ['markdown']
 " }}}
-" emmet.vim settings {{{
-let g:user_emmet_leader_key='<C-f>'
-let g:user_emmet_settings = {
-\  'javascript.jsx' : {
-\      'extends': 'jsx',
-\      'quote_char': "'",
-\  },
-\}
-" }}}
 " FZF settings {{{
 " Enable popup
 let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
-" }}}
-" Common Lisp (Slimv) {{{
-let g:lisp_rainbow=1
 " }}}
 " Alternate files {{{
 " Run a given vim command on the results of alt from a given path.
@@ -336,15 +314,6 @@ if has('macunix')
 	vnoremap ∆ :m '>+1<CR>gv=gv
 	vnoremap ˚ :m '<-2<CR>gv=gv
 endif
-
-" Omnicompletion hotkeys
-inoremap <silent> ,f <C-x><C-f>
-inoremap <silent> ,i <C-x><C-i>
-inoremap <silent> ,l <C-x><C-l>
-inoremap <silent> ,n <C-x><C-n>
-inoremap <silent> ,o <C-x><C-o>
-inoremap <silent> ,t <C-x><C-]>
-inoremap <silent> ,u <C-x><C-u>
 
 " Generate ctags
 nnoremap \r :!ctags -R .<CR>
