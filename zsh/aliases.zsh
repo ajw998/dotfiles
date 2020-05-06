@@ -13,3 +13,4 @@ alias update='sudo softwareupdate -i -a; brew upgrade; brew update; brew cleanup
 # Apart from vi (this is the fallback)
 alias v='nvim'
 alias vim='nvim'
+alias nvm='unalias nvm; [ -s /usr/local/opt/nvm/nvm.sh ] && . "/usr/local/opt/nvm/nvm.sh"; nvm $@'

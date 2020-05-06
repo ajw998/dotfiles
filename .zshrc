@@ -51,7 +51,6 @@ export NVM_DIR="$HOME/.nvm"
 # add our default nvm node (`nvm alias default 10.16.0`) to path without loading nvm
 # this depends on the de fault alias being set
 export PATH="$NVM_DIR/versions/node/v$(<$NVM_DIR/alias/default)/bin:$PATH"
-alias nvm="unalias nvm; [ -s "${HOME}/.nvm/nvm.sh" ] && . "${HOME}/.nvm/nvm.sh"; nvm $@"
 
 if [ -z "$TMUX" ]; then
     tmux attach -t default || tmux new -s default
