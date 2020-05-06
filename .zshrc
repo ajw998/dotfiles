@@ -43,6 +43,15 @@ zstyle ':vcs_info:git:*' formats '%b'
 #   [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
 #   [ -s "/usr/local/opt/nvm/etc/bash_completion" ] && . "/usr/local/opt/nvm/etc/bash_completion"  # This loads nvm bash_completion
 
+# Lazy-load NVM
+# Band-aid solution to NVM taking a long time to load
+# See https://github.com/nvm-sh/nvm/issues/1277
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion" #
+# add our default nvm node (`nvm alias default 10.16.0`) to path without loading nvm
+# this depends on the de fault alias being set
+export PATH="$NVM_DIR/versions/node/v$(<$NVM_DIR/alias/default)/bin:$PATH"
+alias nvm="unalias nvm; [ -s "${HOME}/.nvm/nvm.sh" ] && . "${HOME}/.nvm/nvm.sh"; nvm $@"
 
 if [ -z "$TMUX" ]; then
     tmux attach -t default || tmux new -s default
