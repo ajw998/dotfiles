@@ -26,6 +26,7 @@ Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
+Plug 'kovisoft/slimv'
 call plug#end()
 filetype plugin indent on
 " }}}
@@ -330,9 +331,6 @@ function! StripTrailingWhitespace()
 endfunction
 command! StripTrailingWhitespace call StripTrailingWhitespace()
 nnoremap <F3> :StripTrailingWhitespace<CR>
-
-" Undo Tree
-nnoremap <F5> :UndotreeToggle<CR>
 
 " Show documentation
 nnoremap <silent> K :call <SID>show_documentation()<CR>

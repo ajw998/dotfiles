@@ -18,3 +18,5 @@ Library/
 Lightroom/
 Pictures
 node_modules/
+package.lock.json
+yarn.lock
