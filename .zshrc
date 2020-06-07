@@ -2,13 +2,20 @@
 HISTSIZE=100
 SAVEHIST=100
 
+function appendPath {
+  case ":$PATH:" in
+    *":$1:"*) :;; # already there
+    *) PATH="$1:$PATH";; # or PATH="$PATH:$1"
+  esac
+}
+
 case $(uname -n) in
 	macOS|Andrews-iMac.local)	
-	export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
-	export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
-	export PATH="/usr/local/opt/findutils/libexec/gnubin:$PATH"
-	export PATH="/bin:$PATH"
-	export PATH="/usr/local/opt/openjdk/bin:$PATH"
+	appendPath "/usr/local/bin:/usr/local/sbin"
+	appendPath "/usr/local/opt/coreutils/libexec/gnubin"
+	appendPath "/usr/local/opt/findutils/libexec/gnubin"
+	appendPath "/bin"
+	appendPath "/usr/local/opt/openjdk/bin"
 	source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh  
 	[ -f ~/bin/.fzf.zsh ] && source ~/bin/.fzf.zsh
 		;;
