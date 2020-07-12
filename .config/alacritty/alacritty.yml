@@ -49,7 +49,7 @@ window:
   # Values for `decorations` (macOS only):
   #     - transparent: Title bar, transparent background and title bar buttons
   #     - buttonless: Title bar, transparent background, but no title bar buttons
-  decorations: transparent 
+  decorations: transparent
 
   # When true, alacritty starts maximized.
 
@@ -77,7 +77,7 @@ font:
     #   - (macOS) Menlo
     #   - (Linux) monospace
     #   - (Windows) Consolas
-    family: "Source Code Pro" 
+    family: "Source Code Pro"
     style: "Regular"
 
   # Bold font face
@@ -86,7 +86,7 @@ font:
     #
     # If the bold family is not specified, it will fall back to the
     # value specified for the normal font.
-    family: "Source Code Pro" 
+    family: "Source Code Pro"
     style: "Bold"
 
   # Italic font face
@@ -95,7 +95,7 @@ font:
     #
     # If the italic family is not specified, it will fall back to the
     # value specified for the normal font.
-    family: "Source Code Pro" 
+    family: "Source Code Pro"
     style: "Italic"
 
     # The `style` can be specified to pick a specific face.
@@ -135,11 +135,43 @@ font:
 
 # Keep the log file after quitting Alacritty.
 # # Colors (One Dark)
+# colors:
+#   # Default colors
+#   primary:
+#     background: '0x282c34'
+#     foreground: '0xabb2bf'
+
+#   # Cursor colors
+#   cursor:
+#     text: '0x282c34'
+#     cursor: '0xabb2bf'
+
+#   # Normal colors
+#   normal:
+#     black:   '0x282c34'
+#     red:     '0xe06c75'
+#     green:   '0x98c379'
+#     yellow:  '0xe5c07b'
+#     blue:    '0x61afef'
+#     magenta: '0xc678dd'
+#     cyan:    '0x56b6c2'
+#     white:   '0xabb2bf'
+  # # Bright colors
+  # bright:
+  #   black:   '0x3e4452'
+  #   red:     '0xbe5046'
+  #   green:   '0x98c379'
+  #   yellow:  '0xd19a66'
+  #   blue:    '0x61afef'
+  #   magenta: '0xc678dd'
+  #   cyan:    '0x56b6c2'
+  #   white:   '0x5c6370'
+# # Colors (Monokai Pro Spectrum)
 colors:
   # Default colors
   primary:
-    background: '0x282c34'
-    foreground: '0xabb2bf'
+    background: '0x282a3a'
+    foreground: '0xeaf2f1'
 
   # Cursor colors
   cursor:
@@ -148,25 +180,25 @@ colors:
 
   # Normal colors
   normal:
-    black:   '0x282c34'
-    red:     '0xe06c75'
-    green:   '0x98c379'
-    yellow:  '0xe5c07b'
-    blue:    '0x61afef'
-    magenta: '0xc678dd'
-    cyan:    '0x56b6c2'
-    white:   '0xabb2bf'
+    black:   '0x000000'
+    red:     '0xff657a'
+    green:   '0xbad761'
+    yellow:  '0xffd76d'
+    blue:    '0x9cd1bb'
+    magenta: '0xc39ac9'
+    cyan:    '0x9cd1bb'
+    white:   '0xeaf2f1'
 
   # Bright colors
   bright:
-    black:   '0x3e4452'
-    red:     '0xbe5046'
-    green:   '0x98c379'
-    yellow:  '0xd19a66'
-    blue:    '0x61afef'
-    magenta: '0xc678dd'
-    cyan:    '0x56b6c2'
-    white:   '0x5c6370'
+    black:   '0x000000'
+    red:     '0xff657a'
+    green:   '0xbad761'
+    yellow:  '0xffd76d'
+    blue:    '0x9cd1bb'
+    magenta: '0xc39ac9'
+    cyan:    '0x9cd1bb'
+    white:   '0xeaf2f1'
 
 # If `true`, bold text is drawn using the bright color variants.
   # Dim colors
@@ -215,7 +247,7 @@ colors:
 #
 # Specifying a `duration` of `0` will disable the visual bell.
 visual_bell:
-  animation: Linear 
+  animation: Linear
   duration: 0
   color: '0xffffff'
 
