@@ -104,7 +104,7 @@ set wildmode=full
 " }}}
 " Cursor setting {{{
 " highlight Cursor guifg=white guibg=black
-highlight iCursor guifg=white guibg=steelblue
+" highlight iCursor guifg=white guibg=steelblue
 set guicursor=n-v-c:block-Cursor
 set guicursor+=i:ver100-iCursor
 set guicursor+=n-v-c:blinkon0
@@ -127,7 +127,7 @@ let g:netrw_liststyle = 3
 "(see < http://sunaku.github.io/tmux-24bit-color.html#usage > for more information.)
 if (has("nvim"))
     "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
-    let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+    let $NVIM_TUI_ENABLE_TRUE_COLOR=0
 endif
 
 "For Neovim > 0.1.5 and Vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
@@ -140,10 +140,10 @@ endif
 " before setting background to dark
 syntax enable 
 try
-	colorscheme onedark
+	colorscheme monokai-pro-octagon
 	" set background=dark
 	" " Transparent background
-	hi Normal guibg=NONE ctermbg=NONE
+	" hi Normal guibg=#282a3a ctermbg=#000000
 catch /^Vim\%((\a\+)\)\=:E185/
 	" colorscheme ron
 endtry
@@ -181,6 +181,12 @@ set statusline+=%3*\ %y\ %*                   " Filetype
 set noshowmode                                " Remove --INSERT-- on statusline
 " }}}
 " Filetype settings {{{
+" Ocaml
+let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
+execute "set rtp+=" . g:opamshare . "/merlin/vim"
+
+autocmd FileType ocaml source '"$(opam config var prefix)"'/share/typerex/ocp-indent/ocp-indent.vim
+
 " vimrc
 augroup vim
     autocmd!
