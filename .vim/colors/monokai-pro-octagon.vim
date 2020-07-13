@@ -1,7 +1,6 @@
 " Vim color file
-" Author: Viet Phan
-" Colorscheme Name: monokai pro
-" Inspired by https://www.monokai.pro/
+" Author: Andrew Wong 
+" Colorscheme Name: Monokai Pro Octagon 
 
 set background=dark
 highlight clear
