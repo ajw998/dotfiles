@@ -1,6 +1,6 @@
-" Vim color file
-" Author: Andrew Wong 
-" Colorscheme Name: Monokai Pro Octagon 
+" Vim Colour Scheme (Monokai Pro Octagon)
+" Author: Andrew Wong
+" Colorscheme Name: Monokai Pro Octagon
 
 set background=dark
 highlight clear
@@ -9,7 +9,7 @@ if exists("syntax_on")
   syntax reset
 endif
 
-let g:colors_name = "monokai_pro"
+let g:colors_name = "monokai_pro_octagon"
 
 " Default group
 hi Cursor ctermfg=236 ctermbg=231 cterm=NONE guifg=NONE guibg=#eaf2f1 gui=NONE
@@ -24,8 +24,8 @@ hi VertSplit ctermfg=59 ctermbg=59 cterm=NONE guifg=#696769 guibg=NONE gui=NONE
 hi MatchParen ctermfg=204 ctermbg=NONE cterm=underline guifg=#ff657a guibg=NONE gui=underline
 hi StatusLine ctermfg=231 ctermbg=59 cterm=bold guifg=#eaf1f1 guibg=#696769 gui=bold
 hi StatusLineNC ctermfg=231 ctermbg=59 cterm=NONE guifg=#eaf1f1 guibg=#696769 gui=NONE
-hi Pmenu ctermfg=150 ctermbg=NONE cterm=NONE guifg=#bad761 guibg=NONE gui=NONE
-hi PmenuSel ctermfg=NONE ctermbg=59 cterm=NONE guifg=NONE guibg=#403e41 gui=NONE
+hi Pmenu ctermfg=150 ctermbg=NONE cterm=NONE guifg=#b2b9bd guibg=NONE gui=NONE
+hi PmenuSel ctermfg=NONE ctermbg=59 cterm=NONE guifg=#282a3a guibg=#ffd76d gui=bold
 hi IncSearch ctermfg=236 ctermbg=221 cterm=NONE guifg=#2d2a2e guibg=#ffd76d gui=NONE
 hi Search ctermfg=NONE ctermbg=NONE cterm=NONE guifg=#2d2a2e guibg=#ffd76d gui=underline
 hi Directory ctermfg=209 ctermbg=NONE cterm=NONE guifg=#fc9867 guibg=NONE gui=NONE
@@ -37,7 +37,7 @@ hi Comment ctermfg=59 ctermbg=NONE cterm=NONE guifg=#727072 guibg=NONE gui=itali
 hi Conditional ctermfg=204 ctermbg=NONE cterm=NONE guifg=#ff657a guibg=NONE gui=NONE
 hi Constant ctermfg=147 ctermbg=NONE cterm=NONE guifg=#c39ac9 guibg=NONE gui=NONE
 hi Define ctermfg=204 ctermbg=NONE cterm=NONE guifg=#ff657a guibg=NONE gui=NONE
-hi DiffAdd ctermfg=231 ctermbg=64 cterm=bold guifg=#eaf1f1 guibg=#47840e gui=bold
+hi DiffAdd ctermfg=231 ctermbg=64 cterm=bold guifg=#eaf1f1 guibg=#bad761 gui=bold
 hi DiffDelete ctermfg=88 ctermbg=NONE cterm=NONE guifg=#ff657a19 guibg=NONE gui=NONE
 hi DiffChange ctermfg=231 ctermbg=23 cterm=NONE guifg=#eaf1f1 guibg=#273a5b gui=NONE
 hi DiffText ctermfg=231 ctermbg=24 cterm=bold guifg=#eaf1f1 guibg=#204a87 gui=bold
@@ -48,7 +48,7 @@ hi Function ctermfg=150 ctermbg=NONE cterm=NONE guifg=#bad761 guibg=NONE gui=NON
 hi Identifier ctermfg=116 ctermbg=NONE cterm=NONE guifg=#9cd1bb guibg=NONE gui=italic
 hi Keyword ctermfg=204 ctermbg=NONE cterm=NONE guifg=#ff657a guibg=NONE gui=NONE
 hi Label ctermfg=204 ctermbg=NONE cterm=NONE guifg=#ff657a guibg=NONE gui=NONE
-hi NonText ctermfg=240 ctermbg=236 cterm=NONE guifg=NONE guibg=NONE gui=NONE
+hi NonText ctermfg=240 ctermbg=236 cterm=NONE guifg=#696769 guibg=NONE gui=NONE
 hi Number ctermfg=147 ctermbg=NONE cterm=NONE guifg=#c39ac9 guibg=NONE gui=NONE
 hi Special ctermfg=147 ctermbg=NONE cterm=NONE guifg=#c39ac9 guibg=NONE gui=NONE
 hi Operator ctermfg=204 ctermbg=NONE cterm=NONE guifg=#ff657a guibg=NONE gui=NONE
