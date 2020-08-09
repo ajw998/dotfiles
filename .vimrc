@@ -15,18 +15,20 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 call plug#begin('~/.vim/plugged')
 Plug '/usr/local/opt/fzf'
+Plug 'editorconfig/editorconfig-vim'
 Plug 'joshdick/onedark.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'justinmk/vim-sneak'
+Plug 'kovisoft/slimv'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'rust-lang/rust.vim'
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
-Plug 'kovisoft/slimv'
 call plug#end()
 filetype plugin indent on
 " }}}
@@ -181,11 +183,15 @@ set statusline+=%3*\ %y\ %*                   " Filetype
 set noshowmode                                " Remove --INSERT-- on statusline
 " }}}
 " Filetype settings {{{
+" Rust
+let g:rustfmt_autosave = 1
+
 " Ocaml
+augroup ocaml
 let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
 execute "set rtp+=" . g:opamshare . "/merlin/vim"
-
 autocmd FileType ocaml source '"$(opam config var prefix)"'/share/typerex/ocp-indent/ocp-indent.vim
+augroup END
 
 " vimrc
 augroup vim
@@ -193,6 +199,7 @@ augroup vim
     autocmd FileType vim setlocal foldmethod=marker
 augroup END 
 
+" Plaintext
 augroup text
     autocmd!
     autocmd FileType text setlocal listchars= syntax=off spell tw=79
@@ -212,9 +219,10 @@ augroup END
 autocmd BufNewFile,BufRead *.ejs set ft=html
 
 " Proper PEP8 implementation for python
+augroup python
 autocmd BufNewFile,BufRead *.py
             \  setlocal tabstop=4 softtabstop=4 shiftwidth=4 textwidth=79 expandtab autoindent
-
+augroup END
 " }}}
 " Vim Sneak settings {{{
 let g:sneak#use_ic_scs=1

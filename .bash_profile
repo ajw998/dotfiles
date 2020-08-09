@@ -22,3 +22,5 @@ unset __conda_setup
 [[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
 
 export SSLKEYLOGFILE=~/ssl-key.log
+
+export PATH="$HOME/.cargo/bin:$PATH"
