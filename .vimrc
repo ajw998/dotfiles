@@ -5,6 +5,9 @@
 set nocompatible
 filetype off
 syntax off
+
+" This must be disabled before loading vim-polyglot
+let g:polyglot_disabled = ['markdown']
 " }}}
 " Vim Plug {{{
 " Automatic installation
@@ -279,9 +282,6 @@ nnoremap <silent> <leader>cl  :<C-u>CocList locationlist<CR>
 
 " Highlight symbol under cursor
 nnoremap <silent> <leader>cs :<C-u>CocList -I symbols<CR>
-" }}}
-" vim-polyglot settings {{{
-let g:polyglot_disabled = ['markdown']
 " }}}
 " FZF settings {{{
 " Enable popup
