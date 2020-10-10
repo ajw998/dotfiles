@@ -397,9 +397,6 @@ nnoremap <Leader>e :e **/
 " Show marks
 nnoremap <Leader>m :Marks<CR>
 
-" make file
-nnoremap <Leader>M :make<cr>
-
 " Remove highlighted search results
 " nnoremap <Leader><space> :nohlsearch<bar>:echo<cr>
 nnoremap <Leader><Space> :let@/=""<CR>
@@ -428,12 +425,8 @@ nnoremap - :e %:p:h<CR>
 " Open alternate file
 nnoremap <Leader>al :w<cr>:call AltCommand(expand('%'), ':e')<cr>
 
-
 " Ripgrep find word under cursor 
 nnoremap <Leader>fw :Rg <C-R>=expand("<cword>")<CR><CR>
-
-" Ripgrep for something else
-nnoremap <Leader>ff :Rg 
 
 " Copy current file path
 nnoremap <leader>cp :let @*=expand("%:p")<CR>
