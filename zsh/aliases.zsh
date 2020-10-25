@@ -1,7 +1,6 @@
 alias -g latest='*(om[1])'
 alias :q='exit'
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
-alias doom='$HOME/.emacs.d/bin/doom'
 alias grep='grep --color=always'
 alias l='exa -lah'
 alias mp='mpc toggle'

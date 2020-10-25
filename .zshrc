@@ -16,6 +16,7 @@ case $(uname -n) in
 	appendPath "/usr/local/opt/findutils/libexec/gnubin"
 	appendPath "/bin"
 	appendPath "/usr/local/opt/openjdk/bin"
+	appendPath $GOPATH/bin
 	source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh  
 	[ -f ~/bin/.fzf.zsh ] && source ~/bin/.fzf.zsh
 		;;
