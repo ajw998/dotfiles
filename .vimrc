@@ -17,6 +17,7 @@ if empty(glob('~/.vim/autoload/plug.vim'))
     autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 call plug#begin('~/.vim/plugged')
+Plug 'jalvesaq/Nvim-R'
 Plug '/usr/local/opt/fzf'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'joshdick/onedark.vim'
