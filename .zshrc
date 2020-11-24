@@ -10,7 +10,7 @@ function appendPath {
 }
 
 case $(uname -n) in
-	macOS|Andrews-iMac.local)	
+	macOS|Andrews-iMac)	
 	appendPath "/usr/local/bin:/usr/local/sbin"
 	appendPath "/usr/local/opt/coreutils/libexec/gnubin"
 	appendPath "/usr/local/opt/findutils/libexec/gnubin"
