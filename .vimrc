@@ -17,15 +17,14 @@ if empty(glob('~/.vim/autoload/plug.vim'))
     autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 call plug#begin('~/.vim/plugged')
-Plug 'jalvesaq/Nvim-R'
+Plug 'jalvesaq/Nvim-R', { 'for': 'r' }
 Plug '/usr/local/opt/fzf'
 Plug 'editorconfig/editorconfig-vim'
-Plug 'joshdick/onedark.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'justinmk/vim-sneak'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'rust-lang/rust.vim'
+Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-eunuch'
@@ -34,6 +33,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'hrsh7th/vim-vsnip'
 Plug 'hrsh7th/vim-vsnip-integ'
+Plug 'eraserhd/parinfer-rust', {'do': 'cargo build --release', 'for': 'rust' }
 call plug#end()
 filetype plugin indent on
 " }}}
@@ -257,6 +257,8 @@ imap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-T
 smap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
 " }}}
 " coc.nvim settings {{{
+" Setup Prettier to automatically format code on save
+command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')
 " Use tab for trigger completion with characters ahead and navigate.
 " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
 "})
@@ -434,12 +436,6 @@ nmap <leader>rn <Plug>(coc-rename)
 " Open register
 nnoremap <leader>R :reg<CR>
 
-" Controlling tabs
-nnoremap <C-h> :tabprevious<CR>
-nnoremap <C-l> :tabnext<CR>
-nnoremap <silent> <A-h> :execute 'silent! tabmove ' . (tabpagenr()-2)<CR>
-nnoremap <silent> <A-l> :execute 'silent! tabmove ' . (tabpagenr()+1)<CR>
-
 " Open netrw in current directory with - 
 nnoremap - :e %:p:h<CR>
 
@@ -460,6 +456,9 @@ nnoremap <Leader>gc :Gcommit<CR>
 
 " Execute the line under cursor
 nnoremap <Leader>e :exe getline(line('.'))<CR>
+
+" Toggle syntax highlighting
+nnoremap <Leader>sh :syntax off<CR>
 
 " }}}
 
