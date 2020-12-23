@@ -9,18 +9,14 @@ function appendPath {
   esac
 }
 
-case $(uname -n) in
-	macOS|Andrews-iMac)	
-	appendPath "/usr/local/bin:/usr/local/sbin"
-	appendPath "/usr/local/opt/coreutils/libexec/gnubin"
-	appendPath "/usr/local/opt/findutils/libexec/gnubin"
-	appendPath "/bin"
-	appendPath "/usr/local/opt/openjdk/bin"
-	appendPath $GOPATH/bin
-	source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh  
-	[ -f ~/bin/.fzf.zsh ] && source ~/bin/.fzf.zsh
-		;;
-esac
+appendPath "/usr/local/bin:/usr/local/sbin"
+appendPath "/usr/local/opt/coreutils/libexec/gnubin"
+appendPath "/usr/local/opt/findutils/libexec/gnubin"
+appendPath "/bin"
+appendPath "/usr/local/opt/openjdk/bin"
+appendPath $GOPATH/bin
+source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh  
+[ -f ~/bin/.fzf.zsh ] && source ~/bin/.fzf.zsh
 
 setopt prompt_subst
 PROMPT='%F{red}%B%n%b%f@[%F{yellow}%B%1~%b%f]%# '
@@ -57,9 +53,6 @@ export PATH="$NVM_DIR/versions/node/v$(<$NVM_DIR/alias/default)/bin:$PATH"
 if [ -z "$TMUX" ]; then
     tmux attach -t default || tmux new -s default
 fi
-
-# Initialise rbenv
-# eval "$(rbenv init -)"
 
 # FZF-mark
 source $HOME/bin/fzf-mark/fzf-marks.plugin.zsh
