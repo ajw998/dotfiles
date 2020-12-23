@@ -53,6 +53,11 @@ This dotfile repository provides customisation for the following:
 * `code` 
 * `zsh`
 
+## Cleanup List
+
+Create `.cleanup_list` and all that files you want to remove when you run
+`cleanup`.
+
 ## LICENSE
 
 [WTFPL](http://www.wtfpl.net/)

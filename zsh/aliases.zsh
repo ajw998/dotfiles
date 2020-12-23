@@ -1,6 +1,7 @@
 alias -g latest='*(om[1])'
 alias :q='exit'
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+alias cleanup='[ -f "$HOME/.cleanup_list" ] && < .cleanup_list tr "\n" "\n" | xargs -L1 rm -rf || exit 0'
 alias grep='grep --color=always'
 alias l='exa -lah'
 alias mp='mpc toggle'

@@ -1,0 +1,5 @@
+.Rhistory
+.bash_history
+.psql_history
+.sqlite_history
+.zsh_history
