@@ -6,8 +6,6 @@ set nocompatible
 filetype off
 syntax off
 
-" This must be disabled before loading vim-polyglot
-let g:polyglot_disabled = ['markdown']
 " }}}
 " Vim Plug {{{
 " Automatic installation
@@ -17,7 +15,6 @@ if empty(glob('~/.vim/autoload/plug.vim'))
     autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 call plug#begin('~/.vim/plugged')
-Plug 'jalvesaq/Nvim-R', { 'for': 'r' }
 Plug '/usr/local/opt/fzf'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -25,7 +22,6 @@ Plug 'junegunn/fzf.vim'
 Plug 'justinmk/vim-sneak'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
-Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
@@ -33,7 +29,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'hrsh7th/vim-vsnip'
 Plug 'hrsh7th/vim-vsnip-integ'
-Plug 'eraserhd/parinfer-rust', {'do': 'cargo build --release', 'for': 'rust' }
+Plug 'eraserhd/parinfer-rust', {'do': 'cargo build --release', 'for': [ 'scheme', 'lisp' ] }
 call plug#end()
 filetype plugin indent on
 " }}}
@@ -69,7 +65,7 @@ set shell=/bin/zsh
 set smartcase
 set splitbelow 
 set splitright
-set tabstop=4 softtabstop=0 shiftwidth=4 smarttab
+set tabstop=4 softtabstop=0 shiftwidth=4 expandtab
 set textwidth=0 " No autowrap
 set title
 set viminfo=""
@@ -399,9 +395,6 @@ inoremap <C-e> <C-o>$
 " Set map Leader to ,
 let mapleader = ','
 
-" Search for files from root directory
-nnoremap <Leader>T :Files ~<CR>
-
 " Search for files from current workign directory
 nnoremap <Leader>t :Files<CR>
 
@@ -413,9 +406,6 @@ nnoremap <Leader>q :b#<CR>
 
 " Close buffer
 nnoremap <Leader>x :bd<CR>
-
-" Opening a single file
-nnoremap <Leader>e :e **/
 
 " Show marks
 nnoremap <Leader>m :Marks<CR>
@@ -454,11 +444,4 @@ nnoremap <Leader>gw :Gwrite<CR>
 " Vim fugitive (git-commit)
 nnoremap <Leader>gc :Gcommit<CR>
 
-" Execute the line under cursor
-nnoremap <Leader>e :exe getline(line('.'))<CR>
-
-" Toggle syntax highlighting
-nnoremap <Leader>sh :syntax off<CR>
-
 " }}}
-
