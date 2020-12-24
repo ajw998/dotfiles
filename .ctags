@@ -53,3 +53,7 @@
 --exclude=build
 --exclude=dist
 --exclude=*.bundle.*
+
+--langdef=markdown
+--langmap=markdown:.md
+--regex-markdown=/^#{1,6}[ \s](.*$)/\1/h,heading,headings/
