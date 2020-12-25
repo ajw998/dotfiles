@@ -30,6 +30,9 @@ Plug 'tpope/vim-unimpaired'
 Plug 'hrsh7th/vim-vsnip'
 Plug 'hrsh7th/vim-vsnip-integ'
 Plug 'eraserhd/parinfer-rust', {'do': 'cargo build --release', 'for': [ 'scheme', 'lisp' ] }
+if has('nvim-0.5')
+    Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
+endif
 call plug#end()
 filetype plugin indent on
 " }}}
