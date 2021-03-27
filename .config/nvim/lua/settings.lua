@@ -1,3 +1,6 @@
+-- Get home directory path
+local homedir = os.getenv("HOME")
+
 -- Binding: Global options
 local g = vim.o
 -- Binding: Window-local options
@@ -11,14 +14,18 @@ g.autoread = true
 g.backupdir = '/private/tmp'
 -- Number of screen lines to use for the command line
 g.cmdheight = 2
--- Swap files directory
-g.directory = '~/.vim/swap'
+g.directory = homedir .. '/.vim/swap'
 -- Highlight all matches
 g.hlsearch = true
 -- Disable case sensitivity in search
 g.ignorecase = true
+-- Whether last window will have a status line
+-- Disable this because we will create our own status line
+g.laststatus = 0
 -- Prevent screen from redrawing while executing macro
 g.lazyredraw = true
+-- Strings to use in 'list' mode and for the :list command
+-- g.listchars = 'tab:→,eol:↲,nbsp:␣,trail:•,extends:⟩,precedes:⟨↲'
 -- Tenths of a second to show the matching parens. This is set only if
 -- 'showmatch' is enabled
 g.matchtime = 3
@@ -29,9 +36,13 @@ g.mouse = 'n'
 -- Show matching braces
 g.showmatch = true
 -- Set default shell
-g.shell = 'bin/zsh'
+g.shell = '/bin/zsh'
+-- String to put at the start of lines that have been wrapped
+g.showbreak = '↪'
 -- Override 'ignorecase' option if search contains upper case characters
 g.smartcase = true
+-- Split new window below the current one
+g.splitbelow = true
 -- Split new window to right of the current one
 g.splitright = true
 -- Title of the window will be set to the value of the 'titlestring'
