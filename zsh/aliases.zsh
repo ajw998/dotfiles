@@ -16,3 +16,4 @@ alias v='nvim'
 alias vim='nvim'
 alias nvm='unalias nvm; [ -s /usr/local/opt/nvm/nvm.sh ] && . "/usr/local/opt/nvm/nvm.sh"; nvm $@'
 alias sbcl='rlwrap sbcl'
+alias hstat="curl -o /dev/null --silent --head --write-out '%{http_code}\n' $1"
