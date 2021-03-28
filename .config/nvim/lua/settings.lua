@@ -1,3 +1,5 @@
+local vim = vim
+
 -- Get home directory path
 local homedir = os.getenv("HOME")
 
@@ -9,7 +11,7 @@ local window = vim.wo
 local buffer = vim.bo
 
 -- Automatically read file if changed outside vim
-g.autoread = true 
+g.autoread = true
 -- List of directories for the backup file
 g.backupdir = '/private/tmp'
 -- Number of screen lines to use for the command line
@@ -71,3 +73,11 @@ buffer.shiftwidth = 4
 buffer.expandtab = true
 -- Turn on Omni completion
 buffer.omnifunc='syntaxcomplete#Complete'
+
+-- Disable distribution plugins
+local disable_distribution_plugins = function()
+    vim.g.loaded_netrw = 1
+    vim.loaded_netrwPlugin = 1
+end
+
+disable_distribution_plugins()

@@ -40,3 +40,6 @@ plug('~/.config/nvim/plugged', {
     'neovim/nvim-lspconfig';
 })
 
+-- Vim Sneak settings
+vim.g[ 'sneak#use_ic_scs' ] = 1
+vim.g[ 'sneak#label' ] = 1
