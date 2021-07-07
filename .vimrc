@@ -15,7 +15,10 @@ if empty(glob('~/.vim/autoload/plug.vim'))
     autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 call plug#begin('~/.vim/plugged')
+" Plug 'nvim-treesitter/nvim-treesitter'
+" Plug 'nvim-treesitter/playground'
 Plug '/usr/local/opt/fzf'
+Plug 'tommcdo/vim-lion'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
@@ -30,12 +33,11 @@ Plug 'tpope/vim-unimpaired'
 Plug 'hrsh7th/vim-vsnip'
 Plug 'hrsh7th/vim-vsnip-integ'
 Plug 'eraserhd/parinfer-rust', {'do': 'cargo build --release', 'for': [ 'scheme', 'lisp' ] }
-if has('nvim-0.5')
-    Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
-endif
+Plug 'sheerun/vim-polyglot'
 call plug#end()
 filetype plugin indent on
 " }}}
+"
 " Editor settings {{{
 set autoindent
 set autoread
@@ -429,9 +431,6 @@ nmap <leader>rn <Plug>(coc-rename)
 " Open register
 nnoremap <leader>R :reg<CR>
 
-" Open netrw in current directory with - 
-nnoremap - :e %:p:h<CR>
-
 " Open alternate file
 nnoremap <Leader>al :w<cr>:call AltCommand(expand('%'), ':e')<cr>
 
@@ -447,4 +446,5 @@ nnoremap <Leader>gw :Gwrite<CR>
 " Vim fugitive (git-commit)
 nnoremap <Leader>gc :Gcommit<CR>
 
+iabbrev _istd #include <stdio.h><CR>
 " }}}

@@ -10,3 +10,5 @@
 	editor = nvim
 	pager = diff-so-fancy
 	excludesfile = /Users/wongaj/.gitignore_global
+[init]
+	defaultBranch = master
