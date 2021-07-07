@@ -14,6 +14,7 @@ appendPath "/usr/local/opt/coreutils/libexec/gnubin"
 appendPath "/usr/local/opt/findutils/libexec/gnubin"
 appendPath "/bin"
 appendPath "/usr/local/opt/openjdk/bin"
+appendPath "~/bin"
 appendPath $GOPATH/bin
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh  
 [ -f ~/bin/.fzf.zsh ] && source ~/bin/.fzf.zsh
@@ -56,3 +57,9 @@ fi
 
 # FZF-mark
 source $HOME/bin/fzf-mark/fzf-marks.plugin.zsh
+
+[ -s "/usr/local/Caskroom/google-cloud-sdk" ] && source "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
+[ -s "/usr/local/Caskroom/google-cloud-sdk" ] && source "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
+
+
+alias luamake=/Users/wongaj/Desktop/lua-language-server/3rd/luamake/luamake
