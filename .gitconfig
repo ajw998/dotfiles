@@ -8,7 +8,18 @@
 
 [core]
 	editor = nvim
-	pager = diff-so-fancy
 	excludesfile = /Users/wongaj/.gitignore_global
 [init]
 	defaultBranch = master
+
+[pager]
+    diff = delta
+    log = delta
+    reflog = delta
+    show = delta
+
+[delta]
+    navigate = true
+
+[interactive]
+    diffFilter = delta --color-only
